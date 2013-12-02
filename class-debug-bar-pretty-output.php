@@ -334,7 +334,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   string          $col2   Label for the second table column
 		 * @param   string|array    $class  One or more CSS classes to add to the table
 		 */
-		private static function get_table_start( $col1, $col2, $class = null, $double = false; ) {
+		private static function get_table_start( $col1, $col2, $class = null, $double = false ) {
 			$class_string = '';
 			if( is_string( $class ) && $class !== '' ) {
 				$class_string = ' class="' . esc_attr( $class ) . '"';
