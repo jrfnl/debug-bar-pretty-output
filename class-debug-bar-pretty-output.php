@@ -168,6 +168,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			if ( $space === '' ) {
 				$output .= '</div>';
 			}
+			
+			return $output;
 		}
 
 
@@ -302,9 +304,9 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			$col1 = ( is_string( $col1 ) ? $col1 : __( 'Key', self::NAME ) );
 			$col2 = ( is_string( $col2 ) ? $col2 : __( 'Value', self::NAME ) );
 
-			$return  = self::render_table_start( $col1, $col2, $classes );
-			$return .= self::render_table_rows( $array );
-			$return .= self::render_table_end();
+			$return  = self::get_table_start( $col1, $col2, $classes );
+			$return .= self::get_table_rows( $array );
+			$return .= self::get_table_end();
 			return $return;
 		}
 
@@ -316,7 +318,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   string          $col2   Label for the second table column
 		 * @param   string|array    $class  One or more CSS classes to add to the table
 		 */
-		private static function render_table_start( $col1, $col2, $class = null ) {
+		private static function get_table_start( $col1, $col2, $class = null ) {
 			$class_string = '';
 			if( is_string( $class ) && $class !== '' ) {
 				$class_string = ' class="' . esc_attr( $class ) . '"';
@@ -341,10 +343,10 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   array           $array  Array to be shown in the table
 		 * @return	string
 		 */
-		private static function render_table_rows( $array ) {
+		private static function get_table_rows( $array ) {
 			$output = '';
 			foreach ( $array as $key => $value ) {
-				$output .= self::render_table_row( $key, $value );
+				$output .= self::get_table_row( $key, $value );
 			}
 			return $output;
 		}
@@ -357,7 +359,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   mixed   $value  Value to show
 		 * @return	string
 		 */
-		private static function render_table_row( $key, $value ) {
+		private static function get_table_row( $key, $value ) {
 			$output = '
 			<tr>
 				<th>' . esc_html( $key ) . '</th>
@@ -381,7 +383,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * Generate table closing
 		 * @return	string
 		 */
-		private static function render_table_end() {
+		private static function get_table_end() {
 			return '
 			</tbody>
 		</table>
@@ -420,7 +422,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	void
 		 */
 		private static function object_info( $obj, $escape, $space, $short, $deprecated = null ) {
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_object_info() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_object_info( $obj, $escape, $space, $short );
 		}
 		
@@ -436,7 +438,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	void
 		 */
 		public static function ooutput( $obj, $deprecated = null, $is_sub = false ) {
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_ooutput() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_ooutput( $obj, $is_sub );
 		}
 		
@@ -453,7 +455,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	void
 		 */
 		public static function render_table( $array, $col1, $col2, $class = null, $deprecated = null ) {
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_table( $array, $col1, $col2, $class );
 		}
 	} // End of class Debug_Bar_Pretty_Output
