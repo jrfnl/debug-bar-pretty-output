@@ -2,10 +2,16 @@
 /**
  * Debug Bar Pretty Output - Helper class for Debug Bar plugins
  *
+ * Used by the following plugins:
+ * - Debug Bar Constants
+ * - Debug Bar Post Types
+ * - Debug Bar WP Objects (unreleased)
+ * - Debug Bar Screen Info
+ *
  * @package		Debug Bar Pretty Output
  * @author		Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link		https://github.com/jrfnl/debug-bar-pretty-output
- * @version		1.2.1.3
+ * @version		1.3
  *
  * @copyright	2013 Juliette Reinders Folmer
  * @license		http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -17,267 +23,289 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 	 */
 	class Debug_Bar_Pretty_Output {
 
-		const VERSION = '1.2.1.3';
+		const VERSION = '1.3';
 
-		const CONTEXT = 'db-pretty-output';
-//		const CONTEXT = 'debug-bar-constants';
-//		const CONTEXT = 'debug-bar-post-types';
-//		const CONTEXT = 'debug-bar-wp-objects';
+		const NAME = 'db-pretty-output';
+
 
 		/**
 		 * A not-so-pretty method to show pretty output ;-)
+		 *
+		 * @since	1.3
 		 *
 		 * @param   mixed   $var        Variable to show
 		 * @param   string  $title      (optional) Variable title
 		 * @param   bool    $escape     (optional) Whether to character escape the textual output
 		 * @param   string  $space      (internal) Indentation spacing
 		 * @param   bool    $short      (internal) Short or normal annotation
-		 * @param   string  $context    (internal) Output context
+		 * @return	string
 		 */
-		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $context = self::CONTEXT ) {
+		public static function get_output( $var, $title = '', $escape = true, $space = '', $short = false ) {
 
+			$output = '';
+			
 			if ( $space === '' ) {
-				print '<div class="pr_var">';
+				$output .= '<div class="db-pretty-var">';
 			}
 			if ( is_string( $title ) && $title !== '' ) {
-				print '<h4 style="clear: both;">' . ( $escape === true ? esc_html( $title ) : $title ) . "</h4>\n";
+				$output .= '<h4 style="clear: both;">' . ( $escape === true ? esc_html( $title ) : $title ) . "</h4>\n";
 			}
 
 			if ( is_array( $var ) ) {
-				print 'Array: <br />' . $space . '(<br />';
-				if ( $short !== true ) {
-					$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+				if( $var !== array() ) {
+					$output .= 'Array: <br />' . $space . '(<br />';
+					if ( $short !== true ) {
+						$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+					}
+					else {
+						$spacing = $space . '&nbsp;&nbsp;';
+					}
+					foreach ( $var as $key => $value ) {
+						$output .= $spacing . '[' . ( $escape === true ? esc_html( $key ): $key );
+						if ( $short !== true ) {
+							$output .= ' ';
+							switch ( true ) {
+								case ( is_string( $key ) ) :
+									$output .= '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
+									break;
+								case ( is_int( $key ) ) :
+									$output .= '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
+									break;
+								case ( is_float( $key ) ) :
+									$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
+									break;
+								default:
+									$output .= '(' . __( 'unknown', self::NAME ) .')';
+									break;
+							}
+						}
+						$output .= '] => ';
+						$output .= self::get_output( $value, '', $escape, $spacing, $short );
+					}
+					unset( $key, $value );
+
+					$output .= $space . ')<br />';
 				}
 				else {
-					$spacing = $space . '&nbsp;&nbsp;';
+					$output .= __( 'Empty array()', self::NAME ) . '<br />';
 				}
-				foreach ( $var as $key => $value ) {
-					print $spacing . '[' . ( $escape === true ? esc_html( $key ): $key );
-					if ( $short !== true ) {
-						print  ' ';
-						switch ( true ) {
-							case ( is_string( $key ) ) :
-								print '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
-								break;
-							case ( is_int( $key ) ) :
-								print '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
-								break;
-							case ( is_float( $key ) ) :
-								print '<span style="color: #990033;"><b><i>(float)</i></b></span>';
-								break;
-							default:
-								print '(unknown)';
-								break;
-						}
-					}
-					print '] => ';
-					self::output( $value, '', $escape, $spacing, $short, $context );
-				}
-				print $space . ')<br />';
 			}
 			else if ( is_string( $var ) ) {
-				print '<span style="color: #336600;">';
+				$output .= '<span style="color: #336600;">';
 				if ( $short !== true ) {
-					print '<b><i>string['
-						. strlen( $var )
-					. ']</i></b> : ';
+					$output .= '<b><i>string[' . strlen( $var ) . ']</i></b> : ';
 				}
-				print '&lsquo;'
+				$output .= '&lsquo;'
 					. ( $escape === true ? str_replace( '  ', ' &nbsp;', esc_html( $var ) ) : str_replace( '  ', ' &nbsp;', $var ) )
 					. '&rsquo;</span><br />';
 			}
 			else if ( is_bool( $var ) ) {
-				print '<span style="color: #000099;">';
+				$output .= '<span style="color: #000099;">';
 				if ( $short !== true ) {
-					print '<b><i>bool</i></b> : '
-						. $var
-						. ' ( = ';
+					$output .= '<b><i>bool</i></b> : ' . $var . ' ( = ';
 				}
 				else {
-					print '<b><i>b</i></b> ';
+					$output .= '<b><i>b</i></b> ';
 				}
-				print '<i>'
-					. ( ( $var === false ) ? '<span style="color: #FF0000;">false</span>' : ( ( $var === true ) ? '<span style="color: #336600;">true</span>' : __( 'undetermined', $context ) ) ) . ' </i>';
+				$output .= '<i>'
+					. ( ( $var === false ) ? '<span style="color: #FF0000;">false</span>' : ( ( $var === true ) ? '<span style="color: #336600;">true</span>' : __( 'undetermined', self::NAME ) ) ) . ' </i>';
 				if ( $short !== true ) {
-					print ')';
+					$output .= ')';
 				}
-				print '</span><br />';
+				$output .= '</span><br />';
 			}
 			else if ( is_int( $var ) ) {
-				print '<span style="color: #FF0000;">';
+				$output .= '<span style="color: #FF0000;">';
 				if ( $short !== true ) {
-					print '<b><i>int</i></b> : ';
+					$output .= '<b><i>int</i></b> : ';
 				}
-				print ( ( $var === 0 ) ? '<b>' . $var . '</b>' : $var )
-					. "</span><br />\n";
+				$output .= ( ( $var === 0 ) ? '<b>' . $var . '</b>' : $var ) . "</span><br />\n";
 			}
 			else if ( is_float( $var ) ) {
-				print '<span style="color: #990033;">';
+				$output .= '<span style="color: #990033;">';
 				if ( $short !== true ) {
-					print '<b><i>float</i></b> : ';
+					$output .= '<b><i>float</i></b> : ';
 				}
-				print $var
+				$output .= $var
 					. '</span><br />';
 			}
 			else if ( is_null( $var ) ) {
-				print '<span style="color: #666666;">';
+				$output .= '<span style="color: #666666;">';
 				if ( $short !== true ) {
-					print '<b><i>';
+					$output .= '<b><i>';
 				}
-				print 'null';
+				$output .= 'null';
 				if ( $short !== true ) {
-					print '</i></b> : '
-					. $var
-					. ' ( = <i>NULL</i> )';
+					$output .= '</i></b> : ' . $var . ' ( = <i>NULL</i> )';
 				}
-				print '</span><br />';
+				$output .= '</span><br />';
 			}
 			else if ( is_resource( $var ) ) {
-				print '<span style="color: #666666;">';
+				$output .= '<span style="color: #666666;">';
 				if ( $short !== true ) {
-					print '<b><i>resource</i></b> : ';
+					$output .= '<b><i>resource</i></b> : ';
 				}
-				print $var;
+				$output .= $var;
 				if ( $short !== true ) {
-					print ' ( = <i>RESOURCE</i> )';
+					$output .= ' ( = <i>RESOURCE</i> )';
 				}
-				print '</span><br />';
+				$output .= '</span><br />';
 			}
 			else if ( is_object( $var ) ) {
-				print 'object: <br />' . $space . '(<br />';
+				$output .= 'Object: <br />' . $space . '(<br />';
 				if ( $short !== true ) {
 					$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 				}
 				else {
 					$spacing = $space . '&nbsp;&nbsp;';
 				}
-				self::object_info( $var, $escape, $spacing, $short, $context );
-				print $space . ')<br /><br />';
+				$output .= self::get_object_info( $var, $escape, $spacing, $short );
+				$output .= $space . ')<br /><br />';
 			}
 			else {
-				print esc_html__( 'I haven\'t got a clue what this is: ', $context ) . gettype( $var ) . '<br />';
+				$output .= esc_html__( 'I haven\'t got a clue what this is: ', self::NAME ) . gettype( $var ) . '<br />';
 			}
 			if ( $space === '' ) {
-				print '</div>';
+				$output .= '</div>';
 			}
 		}
 
 
 		/**
-		 * Gather and print pretty output about objects
+		 * Retrieve pretty output about objects
 		 *
 		 * @todo: get object properties to show the variable type on one line with the 'property'
 		 * @todo: get scope of methods and properties
+		 *
+		 * @since	1.3
 		 *
 		 * @param   object  $obj        Object to show
 		 * @param   bool    $escape     (internal) Whether to character escape the textual output
 		 * @param   string  $space      (internal) Indentation spacing
 		 * @param   bool    $short      (internal) Short or normal annotation
-		 * @param   string  $context    (internal) Output context
+		 * @return	string
 		 */
-		public static function object_info( $obj, $escape, $space, $short, $context = self::CONTEXT ) {
+		private static function get_object_info( $obj, $escape, $space, $short ) {
+			
+			$output = '';
 
-			print $space . '<b><i>Class</i></b>: ' . get_class( $obj ) . ' (<br />';
+			$output .= $space . '<b><i>Class</i></b>: ' . esc_html( get_class( $obj ) ) . ' (<br />';
 			if ( $short !== true ) {
 				$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 			}
 			else {
 				$spacing = $space . '&nbsp;&nbsp;';
 			}
-			$ov = get_object_vars( $obj );
-			foreach ( $ov as $var => $val ) {
-				if ( is_array( $val ) ) {
-					print $spacing . '<b><i>property</i></b>: ' . $var . "<b><i> (array)</i></b>\n";
-					self::output( $val, '' , $escape, $spacing, $short, $context );
-				}
-				else {
-					print $spacing . '<b><i>property</i></b>: ' . $var . ' = ';
-					self::output( $val, '' , $escape, $spacing, $short, $context );
+			$properties = get_object_vars( $obj );
+			if( is_array( $properties ) && $properties !== array() ) {
+				foreach ( $properties as $var => $val ) {
+					if ( is_array( $val ) ) {
+						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . "<b><i> (array)</i></b>\n";
+						$output .= self::get_output( $val, '' , $escape, $spacing, $short );
+					}
+					else {
+						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . ' = ';
+						$output .= self::get_output( $val, '' , $escape, $spacing, $short );
+					}
 				}
 			}
-			unset( $ov, $var, $val );
+			unset( $properties, $var, $val );
 		
-			$om = get_class_methods( $obj );
-			foreach ( $om as $method ) {
-				print $spacing . '<b><i>method</i></b>: ' . $method . "<br />\n";
+			$methods = get_class_methods( $obj );
+			if( is_array( $methods ) && $methods !== array() ) {
+				foreach ( $methods as $method ) {
+					$output .= $spacing . '<b><i>method</i></b>: ' . esc_html( $method ) . "<br />\n";
+				}
 			}
-			unset( $om );
-			print $space . ')<br /><br />';
+			unset( $methods, $method );
+
+			$output .= $space . ')<br /><br />';
+			
+			return $output;
 		}
 
 
 		/**
 		 * Helper Function specific to the Debug bar plugin
-		 * Outputs properties in a table and methods in an unordered list
+		 * Retrieves html string of properties in a table and methods in an unordered list
+		 *
+		 * @since	1.3
 		 *
 		 * @param   object  $obj		Object for which to show the properties and methods
-		 * @param   string  $context	(internal) Output context
 		 * @param   bool    $is_sub		(internal) Top level or nested object
+		 * @reurn	string
 		 */
-		public static function ooutput( $obj, $context = self::CONTEXT, $is_sub = false ) {
-
+		public static function get_ooutput( $obj, $is_sub = false ) {
 			$properties = get_object_vars( $obj );
 			$methods    = get_class_methods( $obj );
+			
+			$output = '';
 
 			if ( $is_sub === false ) {
-				echo '
-		<h2><span>' . esc_html__( 'Properties:', $context ) . '</span>' . count( $properties ) . '</h2>
-		<h2><span>' . esc_html__( 'Methods:', $context ) . '</span>' . count( $methods ) . '</h2>';
+				$output .= '
+		<h2><span>' . esc_html__( 'Properties:', self::NAME ) . '</span>' . count( $properties ) . '</h2>
+		<h2><span>' . esc_html__( 'Methods:', self::NAME ) . '</span>' . count( $methods ) . '</h2>';
 			}
 
 			// Properties
 			if ( is_array( $properties ) && $properties !== array() ) {
 				$h = ( $is_sub === false ? 'h3' : 'h4' );
-				echo '
-		<' . $h . '>' . esc_html__( 'Object Properties:', $context ) . '</' . $h . '>';
+				$output .= '
+		<' . $h . '>' . esc_html__( 'Object Properties:', self::NAME ) . '</' . $h . '>';
 
 				uksort( $properties, 'strnatcasecmp' );
-				self::render_table( $properties, __( 'Property', $context ), __( 'Value', $context ), $context, $context );
+				$output .= self::get_table( $properties, __( 'Property', self::NAME ), __( 'Value', self::NAME ), self::NAME );
 			}
 
 			// Methods
 			if ( is_array( $methods ) && $methods !== array() ) {
-				echo '
-		<h3>' . esc_html__( 'Object Methods:', $context ) . '</h3>
-		<ul class="' . $context . '">';
+				$output .= '
+		<h3>' . esc_html__( 'Object Methods:', self::NAME ) . '</h3>
+		<ul class="' . sanitize_html_class( self::NAME ) . '">';
 
 				uksort( $methods, 'strnatcasecmp' );
 
 				foreach ( $methods as $method ) {
-					echo '<li>' . $method . '()</li>';
+					$output .= '<li>' . esc_html( $method ) . '()</li>';
 				}
 				unset( $method );
-				echo '</ul>';
+				$output .= '</ul>';
 			}
+			
+			return $output;
 		}
 
 
 		/**
-		 * Render the table output
+		 * Retrieve the table output
 		 *
-		 * @param   array           $array  Array to be shown in the table
-		 * @param   string          $col1   Label for the first table column
-		 * @param   string          $col2   Label for the second table column
-		 * @param   string|array    $class  One or more CSS classes to add to the table
-		 * @param   string          $context
+		 * @since	1.3
+		 *
+		 * @param   array           $array  	Array to be shown in the table
+		 * @param   string          $col1   	Label for the first table column
+		 * @param   string          $col2   	Label for the second table column
+		 * @param   string|array    $class  	One or more CSS classes to add to the table
+		 * @return	string
 		 */
-		public static function render_table( $array, $col1, $col2, $class = null, $context = self::CONTEXT ) {
+		public static function get_table( $array, $col1, $col2, $class = null ) {
 
-			$classes = 'debug-bar-table';
+			$classes = 'debug-bar-table ' . sanitize_html_class( self::NAME );
 			if ( isset( $class ) ) {
 				if ( is_string( $class ) && $class !== '' ) {
-					$classes .= ' ' . $class;
+					$classes .= ' ' . sanitize_html_class( $class );
 				}
 				else if ( is_array( $class ) && $class !== array() ) {
+					$class   = array_map( $class, 'sanitize_html_class' );
 					$classes = $classes . ' ' . implode( ' ', $class );
 				}
 			}
-			$col1 = ( is_string( $col1 ) ? $col1 : __( 'Key', $context ) );
-			$col2 = ( is_string( $col2 ) ? $col2 : __( 'Value', $context ) );
+			$col1 = ( is_string( $col1 ) ? $col1 : __( 'Key', self::NAME ) );
+			$col2 = ( is_string( $col2 ) ? $col2 : __( 'Value', self::NAME ) );
 
-			self::render_table_start( $col1, $col2, $classes );
-			self::render_table_rows( $array, $context );
-			self::render_table_end();
+			$return  = self::render_table_start( $col1, $col2, $classes );
+			$return .= self::render_table_rows( $array );
+			$return .= self::render_table_end();
+			return $return;
 		}
 
 
@@ -288,9 +316,13 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   string          $col2   Label for the second table column
 		 * @param   string|array    $class  One or more CSS classes to add to the table
 		 */
-		public static function render_table_start( $col1, $col2, $class = null ) {
-			echo '
-		<table class="' . $class . '">
+		private static function render_table_start( $col1, $col2, $class = null ) {
+			$class_string = '';
+			if( is_string( $class ) && $class !== '' ) {
+				$class_string = ' class="' . esc_attr( $class ) . '"';
+			}
+			$output = '
+		<table' . $class_string . '>
 			<thead>
 			<tr>
 				<th>' . esc_html( $col1 ) . '</th>
@@ -298,58 +330,136 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			</tr>
 			</thead>
 			<tbody>';
+			
+			return apply_filters( 'db_pretty_output_table_header', $output );
 		}
 
 
 		/**
 		 * Generate table rows
+		 *
 		 * @param   array           $array  Array to be shown in the table
-		 * @param   string          $context
+		 * @return	string
 		 */
-		public static function render_table_rows( $array, $context = self::CONTEXT ) {
+		private static function render_table_rows( $array ) {
+			$output = '';
 			foreach ( $array as $key => $value ) {
-				self::render_table_row( $key, $value, $context );
+				$output .= self::render_table_row( $key, $value );
 			}
+			return $output;
 		}
 
 
 		/**
 		 * Generate individual table row
+		 *
 		 * @param   mixed   $key    Item key to use a row label
 		 * @param   mixed   $value  Value to show
-		 * @param   string  $context
+		 * @return	string
 		 */
-		public static function render_table_row( $key, $value, $context = self::CONTEXT ) {
-			echo '
+		private static function render_table_row( $key, $value ) {
+			$output = '
 			<tr>
 				<th>' . esc_html( $key ) . '</th>
 				<td>';
 
 			if ( is_object( $value ) ) {
-				self::ooutput( $value, $context, true );
+				$output .= self::get_ooutput( $value, true );
 			}
 			else {
-				self::output( $value, '', true, '', false, $context );
+				$output .= self::get_output( $value, '', true, '', false );
 			}
 
-			echo '</td>
+			$output .= '</td>
 			</tr>';
+			
+			return apply_filters( 'db_pretty_output_table_body_row', $output, $key );
 		}
 
 
 		/**
 		 * Generate table closing
+		 * @return	string
 		 */
-		public static function render_table_end() {
-			echo '
+		private static function render_table_end() {
+			return '
 			</tbody>
 		</table>
 ';
 		}
+		
+		
+		/**
+		 * Print pretty output
+		 *
+		 * @deprecated since v1.3 in favour of get_output()
+		 *
+		 * @param   mixed   $var        Variable to show
+		 * @param   string  $title      (optional) Variable title
+		 * @param   bool    $escape     (optional) Whether to character escape the textual output
+		 * @param   string  $space      (internal) Indentation spacing
+		 * @param   bool    $short      (internal) Short or normal annotation
+		 * @param   string  $deprecated
+		 */
+		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $deprecated = null ) {
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_output( $var, $title, $escape, $space, $short );
+		}
+		
+
+		/**
+		 * Print pretty output about objects
+		 *
+		 * @deprecated since v1.3 in favour of get_object_info()
+		 *
+		 * @param   object  $obj        Object to show
+		 * @param   bool    $escape     (internal) Whether to character escape the textual output
+		 * @param   string  $space      (internal) Indentation spacing
+		 * @param   bool    $short      (internal) Short or normal annotation
+		 * @param   string  $deprecated
+		 * @return	void
+		 */
+		private static function object_info( $obj, $escape, $space, $short, $deprecated = null ) {
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_object_info( $obj, $escape, $space, $short );
+		}
+		
+		/**
+		 * Helper Function specific to the Debug bar plugin
+		 * Outputs properties in a table and methods in an unordered list
+		 *
+		 * @deprecated since v1.3 in favour of get_ooutput()
+		 *
+		 * @param   object  $obj		Object for which to show the properties and methods
+		 * @param   string  $deprecated
+		 * @param   bool    $is_sub		(internal) Top level or nested object
+		 * @return	void
+		 */
+		public static function ooutput( $obj, $deprecated = null, $is_sub = false ) {
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_ooutput( $obj, $is_sub );
+		}
+		
+		/**
+		 * Render the table output
+		 *
+		 * @deprecated since v1.3 in favour of get_table()
+		 *
+		 * @param   array           $array  	Array to be shown in the table
+		 * @param   string          $col1   	Label for the first table column
+		 * @param   string          $col2   	Label for the second table column
+		 * @param   string|array    $class  	One or more CSS classes to add to the table
+		 * @param   string          $deprecated
+		 * @return	void
+		 */
+		public static function render_table( $array, $col1, $col2, $class = null, $deprecated = null ) {
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_table( $array, $col1, $col2, $class );
+		}
 	} // End of class Debug_Bar_Pretty_Output
 
-	/* Load text strings for this class */	
-	load_plugin_textdomain( Debug_Bar_Pretty_Output::CONTEXT, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	/* Load text strings for this class */
+	load_plugin_textdomain( Debug_Bar_Pretty_Output::NAME, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 } // End of if class_exists wrapper
 
