@@ -75,6 +75,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 									$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
 									break;
 								default:
+									/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 									$output .= '(' . __( 'unknown', self::NAME ) .')';
 									break;
 							}
@@ -87,6 +88,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$output .= $space . ')<br />';
 				}
 				else {
+					/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 					$output .= __( 'Empty array()', self::NAME ) . '<br />';
 				}
 			}
@@ -108,6 +110,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$output .= '<b><i>b</i></b> ';
 				}
 				$output .= '<i>'
+					/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 					. ( ( $var === false ) ? '<span style="color: #FF0000;">false</span>' : ( ( $var === true ) ? '<span style="color: #336600;">true</span>' : __( 'undetermined', self::NAME ) ) ) . ' </i>';
 				if ( $short !== true ) {
 					$output .= ')';
@@ -163,6 +166,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				$output .= $space . ')<br /><br />';
 			}
 			else {
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 				$output .= esc_html__( 'I haven\'t got a clue what this is: ', self::NAME ) . gettype( $var ) . '<br />';
 			}
 			if ( $space === '' ) {
@@ -244,23 +248,30 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			$output = '';
 
 			if ( $is_sub === false ) {
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 				$output .= '
-		<h2><span>' . esc_html__( 'Properties:', self::NAME ) . '</span>' . count( $properties ) . '</h2>
+		<h2><span>' . esc_html__( 'Properties:', self::NAME ) . '</span>' . count( $properties ) . '</h2>';
+
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
+				$output .= '
 		<h2><span>' . esc_html__( 'Methods:', self::NAME ) . '</span>' . count( $methods ) . '</h2>';
 			}
 
 			// Properties
 			if ( is_array( $properties ) && $properties !== array() ) {
 				$h = ( $is_sub === false ? 'h3' : 'h4' );
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 				$output .= '
 		<' . $h . '>' . esc_html__( 'Object Properties:', self::NAME ) . '</' . $h . '>';
 
 				uksort( $properties, 'strnatcasecmp' );
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 				$output .= self::get_table( $properties, __( 'Property', self::NAME ), __( 'Value', self::NAME ), self::NAME );
 			}
 
 			// Methods
 			if ( is_array( $methods ) && $methods !== array() ) {
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 				$output .= '
 		<h3>' . esc_html__( 'Object Methods:', self::NAME ) . '</h3>
 		<ul class="' . sanitize_html_class( self::NAME ) . '">';
@@ -301,7 +312,9 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$classes = $classes . ' ' . implode( ' ', $class );
 				}
 			}
+			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			$col1 = ( is_string( $col1 ) ? $col1 : __( 'Key', self::NAME ) );
+			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			$col2 = ( is_string( $col2 ) ? $col2 : __( 'Value', self::NAME ) );
 
 			$return  = self::get_table_start( $col1, $col2, $classes );
@@ -404,10 +417,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   string  $deprecated
 		 */
 		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $deprecated = null ) {
+			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_output( $var, $title, $escape, $space, $short );
 		}
-		
+
 
 		/**
 		 * Print pretty output about objects
@@ -422,6 +436,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	void
 		 */
 		private static function object_info( $obj, $escape, $space, $short, $deprecated = null ) {
+			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_object_info() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_object_info( $obj, $escape, $space, $short );
 		}
@@ -438,6 +453,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	void
 		 */
 		public static function ooutput( $obj, $deprecated = null, $is_sub = false ) {
+			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_ooutput() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_ooutput( $obj, $is_sub );
 		}
@@ -455,6 +471,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	void
 		 */
 		public static function render_table( $array, $col1, $col2, $class = null, $deprecated = null ) {
+			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_table( $array, $col1, $col2, $class );
 		}
