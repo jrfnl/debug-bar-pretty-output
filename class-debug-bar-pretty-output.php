@@ -267,7 +267,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 				uksort( $properties, 'strnatcasecmp' );
 				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-				$output .= self::get_table( $properties, __( 'Property', self::NAME ), __( 'Value', self::NAME ), self::NAME );
+				$output .= self::get_table( $properties, __( 'Property', self::NAME ), __( 'Value', self::NAME ) );
 			}
 
 			// Methods
