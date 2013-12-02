@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Debug Bar Pretty Output\n"
+"POT-Creation-Date: 2013-12-02 05:14+0100\n"
+"PO-Revision-Date: 2013-12-02 05:14+0100\n"
+"Last-Translator: EJ Reinders Folmer <poedit_nospam@adviesenzo.nl>\n"
+"Language-Team: Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>\n"
+"Language: English (en_US)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e;_n;_x;_ex;_nx;esc_html__;esc_html_e;esc_html_x;"
+"esc_attr__;esc_attr_e;esc_attr_x;_n_noop;_nx_noop\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../class-debug-bar-pretty-output.php:78
+msgid "unknown"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:90
+msgid "Empty array()"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:111
+msgid "undetermined"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:166
+msgid "I haven't got a clue what this is: "
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:248
+msgid "Properties:"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:249
+msgid "Methods:"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:256
+msgid "Object Properties:"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:259
+msgid "Property"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:259
+#: ../class-debug-bar-pretty-output.php:305
+msgid "Value"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:265
+msgid "Object Methods:"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:304
+msgid "Key"
+msgstr ""
+
+#: ../class-debug-bar-pretty-output.php:407
+#: ../class-debug-bar-pretty-output.php:425
+#: ../class-debug-bar-pretty-output.php:441
+#: ../class-debug-bar-pretty-output.php:458
+msgid "or even better: upgrade your Debug Bar plugins to their current version"
+msgstr ""
