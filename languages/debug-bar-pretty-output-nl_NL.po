@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Debug Bar Constants - a WordPress Plugin\n"
-"POT-Creation-Date: 2013-12-02 05:44+0100\n"
-"PO-Revision-Date: 2013-12-02 05:45+0100\n"
+"POT-Creation-Date: 2013-12-02 07:06+0100\n"
+"PO-Revision-Date: 2013-12-02 07:06+0100\n"
 "Last-Translator: EJ Reinders Folmer <poedit_nospam@adviesenzo.nl>\n"
 "Language-Team: Juliette Reinders Folmer\n"
 "Language: Dutch\n"
@@ -16,70 +16,68 @@ msgstr ""
 "X-Poedit-SearchPath-1: ..\n"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:79
+#: ../class-debug-bar-pretty-output.php:81
 msgid "unknown"
 msgstr "onbekend"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:92
-msgid "Empty array()"
-msgstr "Leeg array()"
-
-#. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:114
+#: ../class-debug-bar-pretty-output.php:115
 msgid "undetermined"
 msgstr "niet bepaald"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:170
+#: ../class-debug-bar-pretty-output.php:171
 msgid "I haven't got a clue what this is: "
 msgstr "Geen idee wat dit is:"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:253
+#: ../class-debug-bar-pretty-output.php:254
 msgid "Properties:"
 msgstr "Eigenschappen:"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:257
+#: ../class-debug-bar-pretty-output.php:258
 msgid "Methods:"
 msgstr "Methoden:"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:265
+#: ../class-debug-bar-pretty-output.php:266
 msgid "Object Properties:"
 msgstr "Object eigenschappen:"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:269
+#: ../class-debug-bar-pretty-output.php:270
 msgid "Property"
 msgstr "Eigenschap"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:269
-#: ../class-debug-bar-pretty-output.php:318
+#: ../class-debug-bar-pretty-output.php:270
+#: ../class-debug-bar-pretty-output.php:319
 msgid "Value"
 msgstr "Waarde"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:276
+#: ../class-debug-bar-pretty-output.php:277
 msgid "Object Methods:"
 msgstr "Object Methoden:"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:316
+#: ../class-debug-bar-pretty-output.php:317
 msgid "Key"
 msgstr "Sleutel"
 
 #. TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper
-#: ../class-debug-bar-pretty-output.php:421
-#: ../class-debug-bar-pretty-output.php:440
-#: ../class-debug-bar-pretty-output.php:457
-#: ../class-debug-bar-pretty-output.php:475
+#: ../class-debug-bar-pretty-output.php:435
+#: ../class-debug-bar-pretty-output.php:454
+#: ../class-debug-bar-pretty-output.php:471
+#: ../class-debug-bar-pretty-output.php:489
 msgid "or even better: upgrade your Debug Bar plugins to their current version"
 msgstr ""
 "of better nog: upgrade de geïnstalleerde Debug Bar plugins naar hun huidige "
 "versie"
+
+#~ msgid "Empty array()"
+#~ msgstr "Leeg array()"
 
 #~ msgid "Name"
 #~ msgstr "Naam"

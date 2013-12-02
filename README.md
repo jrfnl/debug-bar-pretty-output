@@ -1,4 +1,4 @@
 debug-bar-pretty-output
 =======================
 
-Helper class for WordPress Debug Bar plugins
+Helper class for WordPress Debug Bar plugins - pretty prints variables.

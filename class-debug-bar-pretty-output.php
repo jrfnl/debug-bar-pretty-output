@@ -27,6 +27,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 		const NAME = 'db-pretty-output';
 
+		const DOUBLE_MIN = 10;
+
 
 		/**
 		 * A not-so-pretty method to show pretty output ;-)
@@ -88,8 +90,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$output .= $space . ')<br />';
 				}
 				else {
-					/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-					$output .= __( 'Empty array()', self::NAME ) . '<br />';
+					$output .= 'array()<br />';
 				}
 			}
 			else if ( is_string( $var ) ) {
@@ -317,7 +318,9 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 			$col2 = ( is_string( $col2 ) ? $col2 : __( 'Value', self::NAME ) );
 
-			$return  = self::get_table_start( $col1, $col2, $classes );
+			$double = ( count( $array ) > self::DOUBLE_MIN ) ? true : false;
+
+			$return  = self::get_table_start( $col1, $col2, $classes, $double );
 			$return .= self::get_table_rows( $array );
 			$return .= self::get_table_end();
 			return $return;
@@ -331,7 +334,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   string          $col2   Label for the second table column
 		 * @param   string|array    $class  One or more CSS classes to add to the table
 		 */
-		private static function get_table_start( $col1, $col2, $class = null ) {
+		private static function get_table_start( $col1, $col2, $class = null, $double = false; ) {
 			$class_string = '';
 			if( is_string( $class ) && $class !== '' ) {
 				$class_string = ' class="' . esc_attr( $class ) . '"';
@@ -343,7 +346,18 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				<th>' . esc_html( $col1 ) . '</th>
 				<th>' . esc_html( $col2 ) . '</th>
 			</tr>
-			</thead>
+			</thead>';
+			
+			if( $double === true ) {
+				$output .= '
+				<tfoot>
+				<tr>
+					<th>' . esc_html( $col1 ) . '</th>
+					<th>' . esc_html( $col2 ) . '</th>
+				</tr>
+				</tfoot>';
+			}
+			$output = '
 			<tbody>';
 			
 			return apply_filters( 'db_pretty_output_table_header', $output );
