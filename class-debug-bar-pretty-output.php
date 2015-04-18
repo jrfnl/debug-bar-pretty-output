@@ -554,7 +554,9 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 	/**
 	 * This class does nothing, just a way to keep the list of php classes out of the global namespace
 	 * You can retrieve the list by using the static variable Debug_Bar_List_PHP_Classes::$PHP_classes
-	 * List last updated: 2013-05-05
+	 * List last updated: 2015-04-18
+	 *
+	 * @todo - maybe make parts of the list flexible based on extension_loaded()
 	 */
 	class Debug_Bar_List_PHP_Classes {
 
@@ -575,11 +577,12 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'IteratorAggregate',
 			'ArrayAccess',
 			'Serializable',
-			'Closure',
+			'Closure', // PHP 5.3.0+
+			'Generator', // PHP 5.5.0+
 
 			// Exceptions
 			'Exception',
-			'ErrorException',
+			'ErrorException', // PHP 5.1.0+
 
 
 			/* == Affecting PHPs Behaviour == */
@@ -602,14 +605,6 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Authentication Services == */
-
-			/* == Date and Time Related Extensions == */
-			// Date/Time
-			'DateTime',
-			'DateTimeZone',
-			'DateInterval',
-			'DatePeriod',
-
 
 			/* == Command Line Specific Extensions == */
 
@@ -650,6 +645,8 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoDB',
 					'MongoCollection',
 					'MongoCursor',
+					'MongoCursorInterface',
+					'MongoCommandCursor',
 
 					// Mongo Types
 					'MongoId',
@@ -669,6 +666,12 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoGridFSFile',
 					'MongoGridFSCursor',
 
+					// Mongo Batch Classes
+					'MongoWriteBatch',
+					'MongoInsertBatch',
+					'MongoUpdateBatch',
+					'MongoDeleteBatch',
+
 					// Mongo Miscellaneous
 					'MongoLog',
 					'MongoPool',
@@ -681,7 +684,50 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoCursorTimeoutException',
 					'MongoConnectionException',
 					'MongoGridFSException',
+					'MongoDuplicateKeyException',
+					'MongoProtocolException',
+					'MongoExecutionTimeoutException',
+					'MongoWriteConcernException',
 
+				// PHP driver for MongoDB
+					// MongoDB\Driver
+					'MongoDB\Driver\Manager',
+					'MongoDB\Driver\Command',
+					'MongoDB\Driver\Query',
+					'MongoDB\Driver\BulkWrite',
+					'MongoDB\Driver\WriteConcern',
+					'MongoDB\Driver\ReadPreference',
+					'MongoDB\Driver\Cursor',
+					'MongoDB\Driver\CursorId',
+					'MongoDB\Driver\Server',
+					'MongoDB\Driver\WriteConcernError',
+					'MongoDB\Driver\WriteError',
+					'MongoDB\Driver\WriteResult',
+
+					// BSON
+					'BSON\Binary',
+					'BSON\Javascript',
+					'BSON\MaxKey',
+					'BSON\MinKey',
+					'BSON\ObjectID',
+					'BSON\Regex',
+					'BSON\Timestamp',
+					'BSON\UTCDatetime',
+					'BSON\Type',
+					'BSON\Persistable',
+					'BSON\Serializable',
+					'BSON\Unserializable',
+
+					// MongoDB Exceptions
+					'MongoDB\Driver\Exception',
+					'MongoDB\Driver\RuntimeException',
+					'MongoDB\Driver\ConnectionException',
+					'MongoDB\Driver\SSLConnectionException',
+					'MongoDB\Driver\AuthenticationException',
+					'MongoDB\Driver\WriteException',
+					'MongoDB\Driver\BulkWriteException',
+					'MongoDB\Driver\WriteConcernException',
+					'MongoDB\Driver\DuplicateKeyException',
 
 				// MySQL
 					// Mysqli - MySQL Improved Extension
@@ -719,25 +765,51 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 				'TokyoTyrantException',
 
 
+			/* == Date and Time Related Extensions == */
+			// Date/Time
+			'DateTime',
+			'DateTimeImmutable', // PHP 5.5.0+
+			'DateTimeInterface', // PHP 5.5.0+
+			'DateTimeZone',
+			'DateInterval',
+			'DatePeriod',
+			
+			// HRTime
+			'HRTime\PerformanceCounter',
+			'HRTime\StopWatch',
+			'HRTime\Unit',
+
+
 			/* == File System Related Extensions == */
 			// Directories
 			'Directory',
+
+			// File Information
+			'finfo', // PHP 5.3.0+
 
 
 			/* == Human Language and Character Encoding Support == */
 			// Gender
 			'Gender\Gender',
 
-			// intl
+			// intl - since PHP 5.3.0
 			'Collator',
 			'NumberFormatter',
 			'Locale',
 			'Normalizer',
 			'MessageFormatter',
+			'IntlCalendar', // PHP 5.5.0+
+			'IntlTimeZone', // PHP 5.5.0+
 			'IntlDateFormatter',
 			'ResourceBundle',
 			'Spoofchecker',
 			'Transliterator',
+			'IntlBreakIterator', // (No version information available, might only be in Git)
+			'IntlRuleBasedBreakIterator', // (No version information available, might only be in Git)
+			'IntlCodePointBreakIterator', // (No version information available, might only be in Git)
+			'UConverter', // PHP 5.5.0+
+			'IntlException', // PHP 5.5.0+
+			'IntlIterator', // (No version information available, might only be in Git)
 
 
 			/* == Image Processing and Generation == */
@@ -793,11 +865,15 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'ImagickDraw',
 			'ImagickPixel',
 			'ImagickPixelIterator',
+			'ImagickKernel',
 
 
 			/* == Mail Related Extensions == */
 
 			/* == Mathematical Extensions == */
+			// GMP
+			'GMP', // PHP 5.6.0+
+
 			// Lapack
 			'Lapack',
 			'LapackException',
@@ -854,14 +930,26 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'EvWatcher',
 
 			// pthreads
+			'Threaded',
 			'Thread',
 			'Worker',
-			'Stackable',
+			'Collectable',
+			'Pool',
+			'Stackable', // No longer available ?
 			'Mutex',
 			'Cond',
 
+			// Sync
+			'SyncMutex',
+			'SyncSemaphore',
+			'SyncEvent',
+			'SyncReaderWriter',
+
 
 			/* == Other Basic Extensions == */
+			// FANN - Fast Artificial Neural Network
+			'FANNConnection',
+
 			// JSON - JavaScript Object Notation
 			'JsonSerializable',
 
@@ -919,8 +1007,6 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 				'OuterIterator',
 				'RecursiveIterator',
 				'SeekableIterator',
-				'SplObserver',
-				'SplSubject',
 
 				// SPL Exceptions
 				'BadFunctionCallException',
@@ -1007,7 +1093,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Other Services == */
-			// AMQP
+			// AMQP - Deprecated ?
 			'AMQPConnection',
 			'AMQPChannel',
 			'AMQPExchange',
@@ -1016,6 +1102,9 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			// chdb - Constant hash database
 			'chdb',
+
+			// Curl - Client URL Library
+			'CURLFile',
 
 			// Event
 			'Event',
@@ -1060,6 +1149,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			// Memcached
 			'Memcached',
+			'MemcachedException',
 
 			// RRD - RRDtool
 			'RRDCreator',
@@ -1088,6 +1178,13 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'VarnishStat',
 			'VarnishLog',
 
+			// ZMQ - 0MQ messaging
+			'ZMQ',
+			'ZMQContext',
+			'ZMQSocket',
+			'ZMQPoll',
+			'ZMQDevice',
+
 
 			/* == Search Engine Extensions == */
 			// Solr - Apache Solr
@@ -1105,8 +1202,10 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SolrParams',
 			'SolrModifiableParams',
 			'SolrQuery',
+			'SolrDisMaxQuery',
 			'SolrException',
 			'SolrClientException',
+			'SolrServerException',
 			'SolrIllegalArgumentException',
 			'SolrIllegalOperationException',
 
@@ -1171,6 +1270,13 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SoapParam',
 			'SoapVar',
 
+			// YAR - Yet Another RPC Framework
+			'Yar_Server',
+			'Yar_Client',
+			'Yar_Concurrent_Client',
+			'Yar_Server_Exception',
+			'Yar_Client_Exception',
+
 
 			/* == Windows Only Extensions == */
 
@@ -1205,7 +1311,6 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'DOMText',
 			'DOMXPath',
 
-			'DOMCdataSection', // Not in PHP docs
 			'DOMConfiguration', // Not in PHP docs
 			'DOMDocumentType', // Not in PHP docs
 			'DOMDomError', // Not in PHP docs
@@ -1215,7 +1320,6 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'DOMLocator', // Not in PHP docs
 			'DOMNameList', // Not in PHP docs
 			'DOMNameSpaceNode', // Not in PHP docs
-			'DOMNotation', // Not in PHP docs
 			'DOMStringExtend', // Not in PHP docs
 			'DOMStringList', // Not in PHP docs
 			'DOMTypeinfo', // Not in PHP docs
@@ -1248,6 +1352,12 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			// SimpleXML
 			'SimpleXMLElement',
 			'SimpleXMLIterator',
+
+			// XMLDiff — XML diff and merge
+			'XMLDiff\Base',
+			'XMLDiff\DOM',
+			'XMLDiff\Memory',
+			'XMLDiff\File',
 
 			// XMLReader
 			'XMLReader',
