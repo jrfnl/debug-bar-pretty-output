@@ -74,10 +74,6 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @return	string
 		 */
 		public static function get_output( $var, $title = '', $escape = true, $space = '', $short = false, $depth = 0 ) {
-			if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
-				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-				return '... ( ' . sprintf( __( 'output limited at recursion depth %d', self::NAME ), self::$limit_recursion ) . ')';
-			}
 
 			$output = '';
 
@@ -91,39 +87,44 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			if ( is_array( $var ) ) {
 				if ( $var !== array() ) {
 					$output .= 'Array: <br />' . $space . '(<br />';
-					if ( $short !== true ) {
-						$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+					if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
+						$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', self::NAME ), self::$limit_recursion ) . ')<br />';
 					}
 					else {
-						$spacing = $space . '&nbsp;&nbsp;';
-					}
-					foreach ( $var as $key => $value ) {
-						$output .= $spacing . '[' . ( ( $escape === true ) ? esc_html( $key ) : $key );
 						if ( $short !== true ) {
-							$output .= ' ';
-							switch ( true ) {
-								case ( is_string( $key ) ) :
-									$output .= '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
-									break;
-
-								case ( is_int( $key ) ) :
-									$output .= '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
-									break;
-
-								case ( is_float( $key ) ) :
-									$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
-									break;
-
-								default:
-									/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-									$output .= '(' . __( 'unknown', self::NAME ) .')';
-									break;
-							}
+							$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 						}
-						$output .= '] => ';
-						$output .= self::get_output( $value, '', $escape, $spacing, $short, ++$depth );
+						else {
+							$spacing = $space . '&nbsp;&nbsp;';
+						}
+						foreach ( $var as $key => $value ) {
+							$output .= $spacing . '[' . ( ( $escape === true ) ? esc_html( $key ) : $key );
+							if ( $short !== true ) {
+								$output .= ' ';
+								switch ( true ) {
+									case ( is_string( $key ) ) :
+										$output .= '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
+										break;
+	
+									case ( is_int( $key ) ) :
+										$output .= '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
+										break;
+	
+									case ( is_float( $key ) ) :
+										$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
+										break;
+	
+									default:
+										/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
+										$output .= '(' . __( 'unknown', self::NAME ) .')';
+										break;
+								}
+							}
+							$output .= '] => ';
+							$output .= self::get_output( $value, '', $escape, $spacing, $short, ++$depth );
+						}
+						unset( $key, $value );
 					}
-					unset( $key, $value );
 
 					$output .= $space . ')<br />';
 				}
@@ -195,13 +196,18 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			}
 			else if ( is_object( $var ) ) {
 				$output .= 'Object: <br />' . $space . '(<br />';
-				if ( $short !== true ) {
-					$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+				if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
+					$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', self::NAME ), self::$limit_recursion ) . ')<br />';
 				}
 				else {
-					$spacing = $space . '&nbsp;&nbsp;';
+					if ( $short !== true ) {
+						$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+					}
+					else {
+						$spacing = $space . '&nbsp;&nbsp;';
+					}
+					$output .= self::get_object_info( $var, $escape, $spacing, $short, ++$depth );
 				}
-				$output .= self::get_object_info( $var, $escape, $spacing, $short, ++$depth );
 				$output .= $space . ')<br /><br />';
 			}
 			else {
