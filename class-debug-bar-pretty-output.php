@@ -11,7 +11,7 @@
  * @package		Debug Bar Pretty Output
  * @author		Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link		https://github.com/jrfnl/debug-bar-pretty-output
- * @version		1.3
+ * @version		1.4
  *
  * @copyright	2013 Juliette Reinders Folmer
  * @license		http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -23,11 +23,41 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 	 */
 	class Debug_Bar_Pretty_Output {
 
-		const VERSION = '1.3';
+		const VERSION = '1.4';
 
 		const NAME = 'db-pretty-output';
 
 		const TBODY_MAX = 10;
+
+		/**
+		 * @var bool|int Whether to limit how deep the variable printing will recurse into an array/object
+		 *               Set to a positive integer to limit the recursion depth to that depth.
+		 *               Defaults to false.
+		 */
+		protected static $limit_recursion = false;
+
+
+		/**
+		 * Set the recursion limit.
+		 *
+		 * Always make sure you also unset the limit after you're done with this class so as not to impact
+		 * other plugins which may be using this printing class.
+		 *
+		 * @param int $depth
+		 */
+		public static function limit_recursion( $depth ) {
+			if ( is_int( $depth ) && $depth > 0 ) {
+				self::$limit_recursion = $depth;
+			}
+		}
+
+
+		/**
+		 * Reset the recusion limit to it's default (unlimited).
+		 */
+		public static function unset_recursion_limit() {
+			self::$limit_recursion = false;
+		}
 
 
 		/**
@@ -40,21 +70,26 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   bool    $escape     (optional) Whether to character escape the textual output
 		 * @param   string  $space      (internal) Indentation spacing
 		 * @param   bool    $short      (internal) Short or normal annotation
+		 * @param   int     $depth      (internal) The depth of the current recursion
 		 * @return	string
 		 */
-		public static function get_output( $var, $title = '', $escape = true, $space = '', $short = false ) {
+		public static function get_output( $var, $title = '', $escape = true, $space = '', $short = false, $depth = 0 ) {
+			if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
+				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
+				return '... ( ' . sprintf( __( 'output limited at recursion depth %d', self::NAME ), self::$limit_recursion ) . ')';
+			}
 
 			$output = '';
-			
+
 			if ( $space === '' ) {
 				$output .= '<div class="db-pretty-var">';
 			}
 			if ( is_string( $title ) && $title !== '' ) {
-				$output .= '<h4 style="clear: both;">' . ( $escape === true ? esc_html( $title ) : $title ) . "</h4>\n";
+				$output .= '<h4 style="clear: both;">' . ( ( $escape === true ) ? esc_html( $title ) : $title ) . "</h4>\n";
 			}
 
 			if ( is_array( $var ) ) {
-				if( $var !== array() ) {
+				if ( $var !== array() ) {
 					$output .= 'Array: <br />' . $space . '(<br />';
 					if ( $short !== true ) {
 						$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -63,19 +98,22 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 						$spacing = $space . '&nbsp;&nbsp;';
 					}
 					foreach ( $var as $key => $value ) {
-						$output .= $spacing . '[' . ( $escape === true ? esc_html( $key ): $key );
+						$output .= $spacing . '[' . ( ( $escape === true ) ? esc_html( $key ) : $key );
 						if ( $short !== true ) {
 							$output .= ' ';
 							switch ( true ) {
 								case ( is_string( $key ) ) :
 									$output .= '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
 									break;
+
 								case ( is_int( $key ) ) :
 									$output .= '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
 									break;
+
 								case ( is_float( $key ) ) :
 									$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
 									break;
+
 								default:
 									/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 									$output .= '(' . __( 'unknown', self::NAME ) .')';
@@ -83,7 +121,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 							}
 						}
 						$output .= '] => ';
-						$output .= self::get_output( $value, '', $escape, $spacing, $short );
+						$output .= self::get_output( $value, '', $escape, $spacing, $short, ++$depth );
 					}
 					unset( $key, $value );
 
@@ -99,7 +137,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$output .= '<b><i>string[' . strlen( $var ) . ']</i></b> : ';
 				}
 				$output .= '&lsquo;'
-					. ( $escape === true ? str_replace( '  ', ' &nbsp;', esc_html( $var ) ) : str_replace( '  ', ' &nbsp;', $var ) )
+					. ( ( $escape === true ) ? str_replace( '  ', ' &nbsp;', esc_html( $var ) ) : str_replace( '  ', ' &nbsp;', $var ) )
 					. '&rsquo;</span><br />';
 			}
 			else if ( is_bool( $var ) ) {
@@ -163,7 +201,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				else {
 					$spacing = $space . '&nbsp;&nbsp;';
 				}
-				$output .= self::get_object_info( $var, $escape, $spacing, $short );
+				$output .= self::get_object_info( $var, $escape, $spacing, $short, ++$depth );
 				$output .= $space . ')<br /><br />';
 			}
 			else {
@@ -173,7 +211,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			if ( $space === '' ) {
 				$output .= '</div>';
 			}
-			
+
 			return $output;
 		}
 
@@ -190,10 +228,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param   bool    $escape     (internal) Whether to character escape the textual output
 		 * @param   string  $space      (internal) Indentation spacing
 		 * @param   bool    $short      (internal) Short or normal annotation
+		 * @param   int     $depth      (internal) The depth of the current recursion
 		 * @return	string
 		 */
-		private static function get_object_info( $obj, $escape, $space, $short ) {
-			
+		private static function get_object_info( $obj, $escape, $space, $short, $depth = 0 ) {
+
 			$output = '';
 
 			$output .= $space . '<b><i>Class</i></b>: ' . esc_html( get_class( $obj ) ) . ' (<br />';
@@ -204,22 +243,22 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				$spacing = $space . '&nbsp;&nbsp;';
 			}
 			$properties = get_object_vars( $obj );
-			if( is_array( $properties ) && $properties !== array() ) {
+			if ( is_array( $properties ) && $properties !== array() ) {
 				foreach ( $properties as $var => $val ) {
 					if ( is_array( $val ) ) {
 						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . "<b><i> (array)</i></b>\n";
-						$output .= self::get_output( $val, '' , $escape, $spacing, $short );
+						$output .= self::get_output( $val, '', $escape, $spacing, $short, $depth );
 					}
 					else {
 						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . ' = ';
-						$output .= self::get_output( $val, '' , $escape, $spacing, $short );
+						$output .= self::get_output( $val, '', $escape, $spacing, $short, $depth );
 					}
 				}
 			}
 			unset( $properties, $var, $val );
-		
+
 			$methods = get_class_methods( $obj );
-			if( is_array( $methods ) && $methods !== array() ) {
+			if ( is_array( $methods ) && $methods !== array() ) {
 				foreach ( $methods as $method ) {
 					$output .= $spacing . '<b><i>method</i></b>: ' . esc_html( $method ) . "<br />\n";
 				}
@@ -227,7 +266,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			unset( $methods, $method );
 
 			$output .= $space . ')<br /><br />';
-			
+
 			return $output;
 		}
 
@@ -245,7 +284,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		public static function get_ooutput( $obj, $is_sub = false ) {
 			$properties = get_object_vars( $obj );
 			$methods    = get_class_methods( $obj );
-			
+
 			$output = '';
 
 			if ( $is_sub === false ) {
@@ -260,7 +299,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			// Properties
 			if ( is_array( $properties ) && $properties !== array() ) {
-				$h = ( $is_sub === false ? 'h3' : 'h4' );
+				$h = 'h4';
+				if ( $is_sub === false ) {
+					$h = 'h3';
+				}
+
 				/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
 				$output .= '
 		<' . $h . '>' . esc_html__( 'Object Properties:', self::NAME ) . '</' . $h . '>';
@@ -285,7 +328,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				unset( $method );
 				$output .= '</ul>';
 			}
-			
+
 			return $output;
 		}
 
@@ -314,11 +357,14 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				}
 			}
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-			$col1 = ( is_string( $col1 ) ? $col1 : __( 'Key', self::NAME ) );
+			$col1 = ( is_string( $col1 ) ) ? $col1 : __( 'Key', self::NAME );
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-			$col2 = ( is_string( $col2 ) ? $col2 : __( 'Value', self::NAME ) );
+			$col2 = ( is_string( $col2 ) ) ? $col2 : __( 'Value', self::NAME );
 
-			$double_it = ( count( $array ) > self::TBODY_MAX ) ? true : false;
+			$double_it = false;
+			if ( count( $array ) > self::TBODY_MAX ) {
+				$double_it = true;
+			}
 
 			$return  = self::get_table_start( $col1, $col2, $classes, $double_it );
 			$return .= self::get_table_rows( $array );
@@ -330,13 +376,14 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		/**
 		 * Generate the table header
 		 *
-		 * @param   string          $col1   Label for the first table column
-		 * @param   string          $col2   Label for the second table column
-		 * @param   string|array    $class  One or more CSS classes to add to the table
+		 * @param   string        $col1      Label for the first table column
+		 * @param   string        $col2      Label for the second table column
+		 * @param   string|array  $class     One or more CSS classes to add to the table
+		 * @param   bool          $double_it Whether to repeat the table headers as table footer
 		 */
 		private static function get_table_start( $col1, $col2, $class = null, $double_it = false ) {
 			$class_string = '';
-			if( is_string( $class ) && $class !== '' ) {
+			if ( is_string( $class ) && $class !== '' ) {
 				$class_string = ' class="' . esc_attr( $class ) . '"';
 			}
 			$output = '
@@ -347,8 +394,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				<th>' . esc_html( $col2 ) . '</th>
 			</tr>
 			</thead>';
-			
-			if( $double_it === true ) {
+
+			if ( $double_it === true ) {
 				$output .= '
 				<tfoot>
 				<tr>
@@ -359,7 +406,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			}
 			$output .= '
 			<tbody>';
-			
+
 			return apply_filters( 'db_pretty_output_table_header', $output );
 		}
 
@@ -401,7 +448,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			$output .= '</td>
 			</tr>';
-			
+
 			return apply_filters( 'db_pretty_output_table_body_row', $output, $key );
 		}
 
@@ -416,8 +463,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		</table>
 ';
 		}
-		
-		
+
+
 		/**
 		 * Print pretty output
 		 *
@@ -432,8 +479,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $deprecated = null ) {
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_output( $var, $title, $escape, $space, $short );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_output( $var, $title, $escape, $space, $short ); // xss: ok
 		}
 
 
@@ -451,10 +498,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		private static function object_info( $obj, $escape, $space, $short, $deprecated = null ) {
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_object_info() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_object_info( $obj, $escape, $space, $short );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_object_info() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_object_info( $obj, $escape, $space, $short ); // xss: ok
 		}
-		
+
+
 		/**
 		 * Helper Function specific to the Debug bar plugin
 		 * Outputs properties in a table and methods in an unordered list
@@ -468,10 +516,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		public static function ooutput( $obj, $deprecated = null, $is_sub = false ) {
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_ooutput() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_ooutput( $obj, $is_sub );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_ooutput() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_ooutput( $obj, $is_sub ); // xss: ok
 		}
-		
+
+
 		/**
 		 * Render the table output
 		 *
@@ -486,9 +535,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		public static function render_table( $array, $col1, $col2, $class = null, $deprecated = null ) {
 			/* TRANSLATORS: no need to translate, unless you are translating the Debug Bar Pretty Output Helper */
-			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . __( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_table( $array, $col1, $col2, $class );
+			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
+			echo self::get_table( $array, $col1, $col2, $class ); // xss: ok
 		}
+
+
 	} // End of class Debug_Bar_Pretty_Output
 
 	/* Load text strings for this class */
@@ -507,6 +558,10 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 	 */
 	class Debug_Bar_List_PHP_Classes {
 
+		/**
+		 * @var     array    List of all PHP native class names
+		 * @static
+		 */
 		public static $PHP_classes = array(
 
 			/* == "Core" == */
