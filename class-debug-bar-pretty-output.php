@@ -33,6 +33,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @var bool|int Whether to limit how deep the variable printing will recurse into an array/object
 		 *               Set to a positive integer to limit the recursion depth to that depth.
 		 *               Defaults to false.
+		 *
+		 * @since 1.4
 		 */
 		protected static $limit_recursion = false;
 
@@ -42,6 +44,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 *
 		 * Always make sure you also unset the limit after you're done with this class so as not to impact
 		 * other plugins which may be using this printing class.
+		 *
+		 * @since 1.4
 		 *
 		 * @param int $depth
 		 */
@@ -54,6 +58,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 		/**
 		 * Reset the recusion limit to it's default (unlimited).
+		 *
+		 * @since 1.4
 		 */
 		public static function unset_recursion_limit() {
 			self::$limit_recursion = false;
