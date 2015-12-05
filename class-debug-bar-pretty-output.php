@@ -111,15 +111,15 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 									case ( is_string( $key ) ) :
 										$output .= '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
 										break;
-	
+
 									case ( is_int( $key ) ) :
 										$output .= '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
 										break;
-	
+
 									case ( is_float( $key ) ) :
 										$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
 										break;
-	
+
 									default:
 										$output .= '(' . __( 'unknown', self::NAME ) .')';
 										break;
@@ -536,8 +536,6 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
 			echo self::get_table( $array, $col1, $col2, $class ); // xss: ok
 		}
-
-
 	} // End of class Debug_Bar_Pretty_Output
 
 	/* Load text strings for this class */
@@ -771,7 +769,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'DateTimeZone',
 			'DateInterval',
 			'DatePeriod',
-			
+
 			// HRTime
 			'HRTime\PerformanceCounter',
 			'HRTime\StopWatch',
