@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Debug Bar Pretty Output\n"
-"POT-Creation-Date: 2015-04-18 14:37+0100\n"
-"PO-Revision-Date: 2015-04-18 14:38+0100\n"
+"POT-Creation-Date: 2015-12-05 13:56+0100\n"
+"PO-Revision-Date: 2015-12-05 13:56+0100\n"
 "Last-Translator: Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>\n"
 "Language-Team: Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-KeywordsList: __;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_e\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -17,53 +17,53 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: class-debug-bar-pretty-output.php:91 class-debug-bar-pretty-output.php:198
+#: class-debug-bar-pretty-output.php:97 class-debug-bar-pretty-output.php:204
 #, php-format
 msgid "output limited at recursion depth %d"
 msgstr "output beperkt tot recursiediepte %d"
 
-#: class-debug-bar-pretty-output.php:118
+#: class-debug-bar-pretty-output.php:124
 msgid "unknown"
 msgstr "onbekend"
 
-#: class-debug-bar-pretty-output.php:152
+#: class-debug-bar-pretty-output.php:158
 msgid "undetermined"
 msgstr "niet bepaald"
 
-#: class-debug-bar-pretty-output.php:212
+#: class-debug-bar-pretty-output.php:218
 msgid "I haven't got a clue what this is: "
 msgstr "Geen idee wat dit is:"
 
-#: class-debug-bar-pretty-output.php:295
+#: class-debug-bar-pretty-output.php:301
 msgid "Properties:"
 msgstr "Eigenschappen:"
 
-#: class-debug-bar-pretty-output.php:298
+#: class-debug-bar-pretty-output.php:304
 msgid "Methods:"
 msgstr "Methoden:"
 
-#: class-debug-bar-pretty-output.php:309
+#: class-debug-bar-pretty-output.php:315
 msgid "Object Properties:"
 msgstr "Object eigenschappen:"
 
-#: class-debug-bar-pretty-output.php:312
+#: class-debug-bar-pretty-output.php:318
 msgid "Property"
 msgstr "Eigenschap"
 
-#: class-debug-bar-pretty-output.php:312 class-debug-bar-pretty-output.php:358
+#: class-debug-bar-pretty-output.php:318 class-debug-bar-pretty-output.php:364
 msgid "Value"
 msgstr "Waarde"
 
-#: class-debug-bar-pretty-output.php:318
+#: class-debug-bar-pretty-output.php:324
 msgid "Object Methods:"
 msgstr "Object Methoden:"
 
-#: class-debug-bar-pretty-output.php:357
+#: class-debug-bar-pretty-output.php:363
 msgid "Key"
 msgstr "Sleutel"
 
-#: class-debug-bar-pretty-output.php:477 class-debug-bar-pretty-output.php:495
-#: class-debug-bar-pretty-output.php:512 class-debug-bar-pretty-output.php:530
+#: class-debug-bar-pretty-output.php:483 class-debug-bar-pretty-output.php:501
+#: class-debug-bar-pretty-output.php:518 class-debug-bar-pretty-output.php:536
 msgid "or even better: upgrade your Debug Bar plugins to their current version"
 msgstr ""
 "of better nog: upgrade de geïnstalleerde Debug Bar plugins naar hun huidige "

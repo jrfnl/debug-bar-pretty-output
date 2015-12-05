@@ -23,7 +23,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 	 */
 	class Debug_Bar_Pretty_Output {
 
-		const VERSION = '1.4';
+		const VERSION = '1.5';
 
 		const NAME = 'db-pretty-output';
 
