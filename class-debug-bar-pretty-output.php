@@ -4,6 +4,7 @@
  *
  * Used by the following plugins:
  * - Debug Bar Constants
+ * - Debug Bar Cron (1.0+)
  * - Debug Bar Post Types
  * - Debug Bar WP Objects (unreleased)
  * - Debug Bar Screen Info
