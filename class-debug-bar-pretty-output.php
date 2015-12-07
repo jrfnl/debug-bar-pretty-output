@@ -1,6 +1,6 @@
 <?php
 /**
- * Debug Bar Pretty Output - Helper class for Debug Bar plugins
+ * Debug Bar Pretty Output - Helper class for Debug Bar plugins.
  *
  * Used by the following plugins:
  * - Debug Bar Constants
@@ -19,8 +19,9 @@
  */
 
 if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Panel' ) ) {
+
 	/**
-	 * Class Debug_Bar_Pretty_Output
+	 * Class Debug_Bar_Pretty_Output.
 	 */
 	class Debug_Bar_Pretty_Output {
 
@@ -31,8 +32,9 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		const TBODY_MAX = 10;
 
 		/**
-		 * @var bool|int Whether to limit how deep the variable printing will recurse into an array/object
-		 *               Set to a positive integer to limit the recursion depth to that depth.
+		 * Whether to limit how deep the variable printing will recurse into an array/object.
+		 *
+		 * @var bool|int Set to a positive integer to limit the recursion depth to that depth.
 		 *               Defaults to false.
 		 *
 		 * @since 1.4
@@ -48,7 +50,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 *
 		 * @since 1.4
 		 *
-		 * @param int $depth
+		 * @param int $depth Maximum recursion depth.
 		 */
 		public static function limit_recursion( $depth ) {
 			if ( is_int( $depth ) && $depth > 0 ) {
@@ -68,17 +70,18 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * A not-so-pretty method to show pretty output ;-)
+		 * A not-so-pretty method to show pretty output ;-).
 		 *
-		 * @since	1.3
+		 * @since 1.3
 		 *
-		 * @param   mixed   $var        Variable to show
-		 * @param   string  $title      (optional) Variable title
-		 * @param   bool    $escape     (optional) Whether to character escape the textual output
-		 * @param   string  $space      (internal) Indentation spacing
-		 * @param   bool    $short      (internal) Short or normal annotation
-		 * @param   int     $depth      (internal) The depth of the current recursion
-		 * @return	string
+		 * @param mixed  $var    Variable to show.
+		 * @param string $title  (optional) Variable title.
+		 * @param bool   $escape (optional) Whether to character escape the textual output.
+		 * @param string $space  (internal) Indentation spacing.
+		 * @param bool   $short  (internal) Short or normal annotation.
+		 * @param int    $depth  (internal) The depth of the current recursion.
+		 *
+		 * @return string
 		 */
 		public static function get_output( $var, $title = '', $escape = true, $space = '', $short = false, $depth = 0 ) {
 
@@ -227,19 +230,20 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Retrieve pretty output about objects
+		 * Retrieve pretty output about objects.
 		 *
-		 * @todo: get object properties to show the variable type on one line with the 'property'
-		 * @todo: get scope of methods and properties
+		 * @todo: get object properties to show the variable type on one line with the 'property'.
+		 * @todo: get scope of methods and properties.
 		 *
-		 * @since	1.3
+		 * @since 1.3
 		 *
-		 * @param   object  $obj        Object to show
-		 * @param   bool    $escape     (internal) Whether to character escape the textual output
-		 * @param   string  $space      (internal) Indentation spacing
-		 * @param   bool    $short      (internal) Short or normal annotation
-		 * @param   int     $depth      (internal) The depth of the current recursion
-		 * @return	string
+		 * @param object $obj    Object to show.
+		 * @param bool   $escape (internal) Whether to character escape the textual output.
+		 * @param string $space  (internal) Indentation spacing.
+		 * @param bool   $short  (internal) Short or normal annotation.
+		 * @param int    $depth  (internal) The depth of the current recursion.
+		 *
+		 * @return string
 		 */
 		private static function get_object_info( $obj, $escape, $space, $short, $depth = 0 ) {
 
@@ -282,14 +286,15 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Helper Function specific to the Debug bar plugin
-		 * Retrieves html string of properties in a table and methods in an unordered list
+		 * Helper Function specific to the Debug bar plugin.
+		 * Retrieves html string of properties in a table and methods in an unordered list.
 		 *
-		 * @since	1.3
+		 * @since 1.3
 		 *
-		 * @param   object  $obj		Object for which to show the properties and methods
-		 * @param   bool    $is_sub		(internal) Top level or nested object
-		 * @reurn	string
+		 * @param object $obj    Object for which to show the properties and methods.
+		 * @param bool   $is_sub (internal) Top level or nested object.
+		 *
+		 * @reurn string
 		 */
 		public static function get_ooutput( $obj, $is_sub = false ) {
 			$properties = get_object_vars( $obj );
@@ -305,7 +310,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		<h2><span>' . esc_html__( 'Methods:', self::NAME ) . '</span>' . count( $methods ) . '</h2>';
 			}
 
-			// Properties
+			// Properties.
 			if ( is_array( $properties ) && $properties !== array() ) {
 				$h = 'h4';
 				if ( $is_sub === false ) {
@@ -319,7 +324,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				$output .= self::get_table( $properties, __( 'Property', self::NAME ), __( 'Value', self::NAME ) );
 			}
 
-			// Methods
+			// Methods.
 			if ( is_array( $methods ) && $methods !== array() ) {
 				$output .= '
 		<h3>' . esc_html__( 'Object Methods:', self::NAME ) . '</h3>
@@ -339,15 +344,16 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Retrieve the table output
+		 * Retrieve the table output.
 		 *
-		 * @since	1.3
+		 * @since 1.3
 		 *
-		 * @param   array           $array  	Array to be shown in the table
-		 * @param   string          $col1   	Label for the first table column
-		 * @param   string          $col2   	Label for the second table column
-		 * @param   string|array    $class  	One or more CSS classes to add to the table
-		 * @return	string
+		 * @param array        $array Array to be shown in the table.
+		 * @param string       $col1  Label for the first table column.
+		 * @param string       $col2  Label for the second table column.
+		 * @param string|array $class One or more CSS classes to add to the table.
+		 *
+		 * @return string
 		 */
 		public static function get_table( $array, $col1, $col2, $class = null ) {
 
@@ -377,12 +383,12 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Generate the table header
+		 * Generate the table header.
 		 *
-		 * @param   string        $col1      Label for the first table column
-		 * @param   string        $col2      Label for the second table column
-		 * @param   string|array  $class     One or more CSS classes to add to the table
-		 * @param   bool          $double_it Whether to repeat the table headers as table footer
+		 * @param string       $col1      Label for the first table column.
+		 * @param string       $col2      Label for the second table column.
+		 * @param string|array $class     One or more CSS classes to add to the table.
+		 * @param bool         $double_it Whether to repeat the table headers as table footer.
 		 */
 		private static function get_table_start( $col1, $col2, $class = null, $double_it = false ) {
 			$class_string = '';
@@ -415,10 +421,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Generate table rows
+		 * Generate table rows.
 		 *
-		 * @param   array           $array  Array to be shown in the table
-		 * @return	string
+		 * @param array $array Array to be shown in the table.
+		 *
+		 * @return string
 		 */
 		private static function get_table_rows( $array ) {
 			$output = '';
@@ -430,11 +437,12 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Generate individual table row
+		 * Generate individual table row.
 		 *
-		 * @param   mixed   $key    Item key to use a row label
-		 * @param   mixed   $value  Value to show
-		 * @return	string
+		 * @param mixed $key   Item key to use a row label.
+		 * @param mixed $value Value to show.
+		 *
+		 * @return string
 		 */
 		private static function get_table_row( $key, $value ) {
 			$output = '
@@ -457,8 +465,9 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Generate table closing
-		 * @return	string
+		 * Generate table closing.
+		 *
+		 * @return string
 		 */
 		private static function get_table_end() {
 			return '
@@ -469,77 +478,80 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 
 		/**
-		 * Print pretty output
+		 * Print pretty output.
 		 *
-		 * @deprecated since v1.3 in favour of get_output()
+		 * @deprecated since v1.3 in favour of get_output().
 		 *
-		 * @param   mixed   $var        Variable to show
-		 * @param   string  $title      (optional) Variable title
-		 * @param   bool    $escape     (optional) Whether to character escape the textual output
-		 * @param   string  $space      (internal) Indentation spacing
-		 * @param   bool    $short      (internal) Short or normal annotation
-		 * @param   string  $deprecated
+		 * @param mixed  $var        Variable to show.
+		 * @param string $title      (optional) Variable title.
+		 * @param bool   $escape     (optional) Whether to character escape the textual output.
+		 * @param string $space      (internal) Indentation spacing.
+		 * @param bool   $short      (internal) Short or normal annotation.
+		 * @param string $deprecated ==Deprecated argument.
 		 */
 		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_output( $var, $title, $escape, $space, $short ); // xss: ok
+			echo self::get_output( $var, $title, $escape, $space, $short ); // WPCS: xss ok.
 		}
 
 
 		/**
-		 * Print pretty output about objects
+		 * Print pretty output about objects.
 		 *
-		 * @deprecated since v1.3 in favour of get_object_info()
+		 * @deprecated since v1.3 in favour of get_object_info().
 		 *
-		 * @param   object  $obj        Object to show
-		 * @param   bool    $escape     (internal) Whether to character escape the textual output
-		 * @param   string  $space      (internal) Indentation spacing
-		 * @param   bool    $short      (internal) Short or normal annotation
-		 * @param   string  $deprecated
-		 * @return	void
+		 * @param object $obj        Object to show.
+		 * @param bool   $escape     (internal) Whether to character escape the textual output.
+		 * @param string $space      (internal) Indentation spacing.
+		 * @param bool   $short      (internal) Short or normal annotation.
+		 * @param string $deprecated ==Deprecated argument.
+		 *
+		 * @return void
 		 */
 		private static function object_info( $obj, $escape, $space, $short, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_object_info() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_object_info( $obj, $escape, $space, $short ); // xss: ok
+			echo self::get_object_info( $obj, $escape, $space, $short ); // WPCS: xss ok.
 		}
 
 
 		/**
-		 * Helper Function specific to the Debug bar plugin
-		 * Outputs properties in a table and methods in an unordered list
+		 * Helper Function specific to the Debug bar plugin.
+		 * Outputs properties in a table and methods in an unordered list.
 		 *
-		 * @deprecated since v1.3 in favour of get_ooutput()
+		 * @deprecated since v1.3 in favour of get_ooutput().
 		 *
-		 * @param   object  $obj		Object for which to show the properties and methods
-		 * @param   string  $deprecated
-		 * @param   bool    $is_sub		(internal) Top level or nested object
-		 * @return	void
+		 * @param object $obj        Object for which to show the properties and methods.
+		 * @param string $deprecated ==Deprecated argument.
+		 * @param bool   $is_sub     (internal) Top level or nested object.
+		 *
+		 * @return void
 		 */
 		public static function ooutput( $obj, $deprecated = null, $is_sub = false ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_ooutput() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_ooutput( $obj, $is_sub ); // xss: ok
+			echo self::get_ooutput( $obj, $is_sub ); // WPCS: xss ok.
 		}
 
 
 		/**
-		 * Render the table output
+		 * Render the table output.
 		 *
-		 * @deprecated since v1.3 in favour of get_table()
+		 * @deprecated since v1.3 in favour of get_table().
 		 *
-		 * @param   array           $array  	Array to be shown in the table
-		 * @param   string          $col1   	Label for the first table column
-		 * @param   string          $col2   	Label for the second table column
-		 * @param   string|array    $class  	One or more CSS classes to add to the table
-		 * @param   string          $deprecated
-		 * @return	void
+		 * @param array        $array  	   Array to be shown in the table.
+		 * @param string       $col1   	   Label for the first table column.
+		 * @param string       $col2       Label for the second table column.
+		 * @param string|array $class  	   One or more CSS classes to add to the table.
+		 * @param string       $deprecated ==Deprecated argument.
+		 *
+		 * @return void
 		 */
 		public static function render_table( $array, $col1, $col2, $class = null, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', self::NAME ) );
-			echo self::get_table( $array, $col1, $col2, $class ); // xss: ok
+			echo self::get_table( $array, $col1, $col2, $class ); // WPCS: xss ok.
 		}
-	} // End of class Debug_Bar_Pretty_Output
+	} // End of class Debug_Bar_Pretty_Output.
 
-	/* Load text strings for this class */
+	/* Load text strings for this class. */
 	load_plugin_textdomain( Debug_Bar_Pretty_Output::NAME, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-} // End of if class_exists wrapper
+} // End of if class_exists wrapper.

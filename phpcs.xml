@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<ruleset name="Debug Bar Pretty Output">
+	<description>The code standard for Debug Bar Pretty Output is WordPress.</description>
+
+	<!-- Exclude the codesniffer itself from checks. -->
+	<exclude-pattern>phpcs/*</exclude-pattern>
+	<exclude-pattern>wpcs/*</exclude-pattern>
+
+	<rule ref="WordPress">
+		<exclude name="WordPress.VIP" />
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
+
+		<!-- else on new line is perfectly fine -->
+		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace" />
+
+		<!-- Demanding Yoda conditions is stupid. -->
+		<exclude name="WordPress.PHP.YodaConditions"/>
+
+	</rule>
+
+	<!-- Exclude the PHP Core classes list from some documentation checks. -->
+	<rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+		<exclude-pattern>class-debug-bar-list-php-classes.php</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.Commenting.BlockComment.NoNewLine">
+		<exclude-pattern>class-debug-bar-list-php-classes.php</exclude-pattern>
+	</rule>
+
+	<!-- Exclude the 'empty' index files from some documentation checks -->
+	<rule ref="Squiz.Commenting.FileComment.WrongStyle">
+		<exclude-pattern>*/index.php</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.Commenting.InlineComment.SpacingAfter">
+		<exclude-pattern>*/index.php</exclude-pattern>
+	</rule>
+
+</ruleset>

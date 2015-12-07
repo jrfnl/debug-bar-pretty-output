@@ -1,6 +1,6 @@
 <?php
 /**
- * Debug_Bar_List_PHP_Classes - Helper class for Debug Bar plugins
+ * Debug_Bar_List_PHP_Classes - Helper class for Debug Bar plugins.
  *
  * Used by the following plugins:
  * - Debug Bar Constants
@@ -16,17 +16,21 @@
  */
 
 if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
+
 	/**
 	 * This class does nothing, just a way to keep the list of php classes out of the global namespace
 	 * You can retrieve the list by using the static variable Debug_Bar_List_PHP_Classes::$PHP_classes
 	 * List last updated: 2015-12-05 (just after PHP 7.0.0 release).
 	 *
-	 * @todo - maybe make parts of the list flexible based on extension_loaded()
+	 * @todo - maybe make parts of the list flexible based on extension_loaded().
 	 */
 	class Debug_Bar_List_PHP_Classes {
 
 		/**
-		 * @var     array    List of all PHP native class names
+		 * List of all PHP native class names.
+		 *
+		 * @var array
+		 *
 		 * @static
 		 */
 		public static $PHP_classes = array(
@@ -37,51 +41,51 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'stdClass',
 			'__PHP_Incomplete_Class',
 
-			// Interfaces
+			// Interfaces.
 			// @see http://php.net/reserved.interfaces
 			'Traversable',
 			'Iterator',
 			'IteratorAggregate',
 			'ArrayAccess',
 			'Serializable',
-			'Closure', // PHP 5.3.0+
-			'Generator', // PHP 5.5.0+
-			'Throwable', // PHP 7.0.0+
+			'Closure',   // PHP 5.3.0+.
+			'Generator', // PHP 5.5.0+.
+			'Throwable', // PHP 7.0.0+.
 
-			// Exceptions
+			// Exceptions.
 			// @see http://php.net/reserved.exceptions
 			'Exception',
-			'ErrorException', // PHP 5.1.0+
-			'Error', // PHP 7.0.0+
-			'ArithmeticError', // PHP 7.0.0+
-			'AssertionError', // PHP 7.0.0+
-			'DivisionByZeroError', // PHP 7.0.0+
-			'ParseError', // PHP 7.0.0+
-			'TypeError', // PHP 7.0.0+
+			'ErrorException',      // PHP 5.1.0+.
+			'Error',               // PHP 7.0.0+.
+			'ArithmeticError',     // PHP 7.0.0+.
+			'AssertionError',      // PHP 7.0.0+.
+			'DivisionByZeroError', // PHP 7.0.0+.
+			'ParseError',          // PHP 7.0.0+.
+			'TypeError',           // PHP 7.0.0+.
 
 
 			/* == Affecting PHPs Behaviour == */
-			// APC
+			// APC.
 			// @see http://php.net/book.apc
 			'APCIterator',
 
-			// APC User Cache
+			// APC User Cache.
 			// @see http://php.net/book.apcu
 			'APCUIterator',
 
-			// runkit
+			// Rrunkit
 			// @see http://php.net/book.runkit
 			'Runkit_Sandbox',
 			'Runkit_Sandbox_Parent',
 
-			// Weakref
+			// Weakref.
 			// @see http://php.net/book.weakref
 			'WeakRef',
 			'WeakMap',
 
 
 			/* == Audio Formats Manipulation == */
-			// KTaglib
+			// KTaglib.
 			// @see http://php.net/book.ktaglib
 			'KTaglib_MPEG_File',
 			'KTaglib_MPEG_AudioProperties',
@@ -96,20 +100,20 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			/* == Command Line Specific Extensions == */
 
 			/* == Compression and Archive Extensions == */
-			// Phar
+			// Phar.
 			// @see http://php.net/book.phar
 			'Phar',
 			'PharData',
 			'PharFileInfo',
 			'PharException',
 
-			// Rar
+			// Rar.
 			// @see http://php.net/book.rar
 			'RarArchive',
 			'RarEntry',
 			'RarException',
 
-			// Zip
+			// Zip.
 			// @see http://php.net/book.zip
 			'ZipArchive',
 
@@ -121,18 +125,18 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			/* == Database Extensions == */
 
 				/* = Abstraction Layers = */
-				// PDO
+				// PDO.
 				// @see http://php.net/book.pdo
 				'PDO',
 				'PDOStatement',
 				'PDOException',
-				'PDORow',  // Not in PHP docs
+				'PDORow',  // Not in PHP docs.
 
 
 				/* = Vendor Specific Database Extensions = */
-				// Mongo
+				// Mongo.
 				// @see http://php.net/book.mongo
-					// Mongo Core Classes
+					// Mongo Core Classes.
 					'MongoClient',
 					'MongoDB',
 					'MongoCollection',
@@ -140,7 +144,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoCursorInterface',
 					'MongoCommandCursor',
 
-					// Mongo Types
+					// Mongo Types.
 					'MongoId',
 					'MongoCode',
 					'MongoDate',
@@ -153,23 +157,23 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoMaxKey',
 					'MongoTimestamp',
 
-					// Mongo GridFS Classes
+					// Mongo GridFS Classes.
 					'MongoGridFS',
 					'MongoGridFSFile',
 					'MongoGridFSCursor',
 
-					// Mongo Batch Classes
+					// Mongo Batch Classes.
 					'MongoWriteBatch',
 					'MongoInsertBatch',
 					'MongoUpdateBatch',
 					'MongoDeleteBatch',
 
-					// Mongo Miscellaneous
+					// Mongo Miscellaneous.
 					'MongoLog',
 					'MongoPool',
 					'Mongo',
 
-					// Mongo Exceptions
+					// Mongo Exceptions.
 					'MongoException',
 					'MongoResultException',
 					'MongoCursorException',
@@ -181,9 +185,9 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoExecutionTimeoutException',
 					'MongoWriteConcernException',
 
-				// PHP driver for MongoDB
+				// PHP driver for MongoDB.
 				// @see http://php.net/set.mongodb
-					// MongoDB\Driver
+					// MongoDB\Driver.
 					'MongoDB\Driver\Manager',
 					'MongoDB\Driver\Command',
 					'MongoDB\Driver\Query',
@@ -197,7 +201,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoDB\Driver\WriteError',
 					'MongoDB\Driver\WriteResult',
 
-					// BSON
+					// BSON.
 					'MongoDB\BSON\Binary',
 					'MongoDB\BSON\Javascript',
 					'MongoDB\BSON\MaxKey',
@@ -211,13 +215,13 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoDB\BSON\Serializable',
 					'MongoDB\BSON\Unserializable',
 
-					// MongoDB Exceptions
+					// MongoDB Exceptions.
 					'MongoDB\Driver\Exception\AuthenticationException',
 					'MongoDB\Driver\Exception\BulkWriteException',
 					'MongoDB\Driver\Exception\ConnectionException',
 					'MongoDB\Driver\Exception\ConnectionTimeoutException',
 					'MongoDB\Driver\Exception\Exception',
-					'MongoDB\Driver\Exception\ExecutionTimeoutException',  // (No version information available, might only be in Git)
+					'MongoDB\Driver\Exception\ExecutionTimeoutException',  // (No version information available, might only be in Git).
 					'MongoDB\Driver\Exception\InvalidArgumentException',
 					'MongoDB\Driver\Exception\LogicException',
 					'MongoDB\Driver\Exception\RuntimeException',
@@ -228,9 +232,9 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'MongoDB\Driver\DuplicateKeyException', // No longer in the manual, possibly deprecated ?
 					'MongoDB\Driver\WriteConcernException', // No longer in the manual, possibly deprecated ?
 
-				// MySQL
+				// MySQL.
 				// @see http://php.net/set.mysqlinfo
-					// Mysqli - MySQL Improved Extension
+					// Mysqli - MySQL Improved Extension.
 					// @see http://php.net/book.mysqli
 					'mysqli',
 					'mysqli_stmt',
@@ -239,30 +243,30 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 					'mysqli_warning',
 					'mysqli_sql_exception',
 
-					// mysqlnd_uh - Mysqlnd user handler plugin
+					// Mysqlnd_uh - Mysqlnd user handler plugin.
 					// @see http://php.net/book.mysqlnd-uh
 					'MysqlndUhConnection',
 					'MysqlndUhPreparedStatement',
 
-				// OCI8 - Oracle OCI8
+				// OCI8 - Oracle OCI8.
 				// @see http://php.net/book.oci8
 				'OCI-Collection',
 				'OCI-Lob',
 
-				// SQLLite
+				// SQLLite.
 				// @see http://php.net/ref.sqlite
-				'SQLiteDatabase',  // Not easy to find in PHP docs
-				'SQLiteResult',  // Not easy to find  in PHP docs
-				'SQLiteUnbuffered',  // Not easy to find  in PHP docs
-				'SQLiteException',	// Not easy to find  in PHP docs
+				'SQLiteDatabase',  // Not easy to find in PHP docs.
+				'SQLiteResult',  // Not easy to find  in PHP docs.
+				'SQLiteUnbuffered',  // Not easy to find  in PHP docs.
+				'SQLiteException',	// Not easy to find  in PHP docs.
 
-				// SQLite3
+				// SQLite3.
 				// @see http://php.net/book.sqlite3
 				'SQLite3',
 				'SQLite3Stmt',
 				'SQLite3Result',
 
-				// tokyo_tyrant
+				// Tokyo_tyrant.
 				// @see http://php.net/book.tokyo-tyrant
 				'TokyoTyrant',
 				'TokyoTyrantTable',
@@ -272,16 +276,16 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Date and Time Related Extensions == */
-			// Date/Time
+			// Date/Time.
 			// @see http://php.net/book.datetime
 			'DateTime',
-			'DateTimeImmutable', // PHP 5.5.0+
-			'DateTimeInterface', // PHP 5.5.0+
+			'DateTimeImmutable', // PHP 5.5.0+.
+			'DateTimeInterface', // PHP 5.5.0+.
 			'DateTimeZone',
 			'DateInterval',
 			'DatePeriod',
 
-			// HRTime
+			// HRTime.
 			// @see http://php.net/book.hrtime
 			'HRTime\PerformanceCounter',
 			'HRTime\StopWatch',
@@ -289,45 +293,45 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == File System Related Extensions == */
-			// Directories
+			// Directories.
 			// @see http://php.net/book.dir
 			'Directory',
 
-			// File Information
+			// File Information.
 			// @see http://php.net/book.fileinfo
-			'finfo', // PHP 5.3.0+
+			'finfo', // PHP 5.3.0+.
 
 
 			/* == Human Language and Character Encoding Support == */
-			// Gender
+			// Gender.
 			// @see http://php.net/book.gender
 			'Gender\Gender',
 
-			// intl - since PHP 5.3.0
+			// Intl - since PHP 5.3.0.
 			// @see http://php.net/book.intl
 			'Collator',
 			'NumberFormatter',
 			'Locale',
 			'Normalizer',
 			'MessageFormatter',
-			'IntlCalendar', // PHP 5.5.0+
-			'IntlTimeZone', // PHP 5.5.0+
+			'IntlCalendar',               // PHP 5.5.0+.
+			'IntlTimeZone',               // PHP 5.5.0+.
 			'IntlDateFormatter',
 			'ResourceBundle',
 			'Spoofchecker',
 			'Transliterator',
-			'IntlBreakIterator', // (No version information available, might only be in Git)
-			'IntlRuleBasedBreakIterator', // (No version information available, might only be in Git)
-			'IntlCodePointBreakIterator', // (No version information available, might only be in Git)
-			'IntlPartsIterator', // (No version information available, might only be in Git)
-			'UConverter', // PHP 5.5.0+
-			'IntlChar', // PHP 7.0.0+
-			'IntlException', // PHP 5.5.0+
-			'IntlIterator', // (No version information available, might only be in Git)
+			'IntlBreakIterator',          // (No version information available, might only be in Git).
+			'IntlRuleBasedBreakIterator', // (No version information available, might only be in Git).
+			'IntlCodePointBreakIterator', // (No version information available, might only be in Git).
+			'IntlPartsIterator',          // (No version information available, might only be in Git).
+			'UConverter',                 // PHP 5.5.0+.
+			'IntlChar',                   // PHP 7.0.0+.
+			'IntlException',              // PHP 5.5.0+.
+			'IntlIterator',               // (No version information available, might only be in Git).
 
 
 			/* == Image Processing and Generation == */
-			// Cairo
+			// Cairo.
 			// @see http://php.net/book.cairo
 			'Cairo',
 			'CairoContext',
@@ -370,13 +374,13 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'CairoSubpixelOrder',
 			'CairoSvgVersion',
 
-			// Gmagick
+			// Gmagick.
 			// @see http://php.net/book.gmagick
 			'Gmagick',
 			'GmagickDraw',
 			'GmagickPixel',
 
-			// ImageMagick
+			// ImageMagick.
 			// @see http://php.net/book.imagick
 			'Imagick',
 			'ImagickDraw',
@@ -388,18 +392,18 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			/* == Mail Related Extensions == */
 
 			/* == Mathematical Extensions == */
-			// GMP
+			// GMP.
 			// @see http://php.net/book.gmp
-			'GMP', // PHP 5.6.0+
+			'GMP', // PHP 5.6.0+.
 
-			// Lapack
+			// Lapack.
 			// @see http://php.net/book.lapack
 			'Lapack',
 			'LapackException',
 
 
 			/* == Non-Text MIME Output == */
-			// haru
+			// Haru.
 			// @see http://php.net/book.haru
 			'HaruException',
 			'HaruDoc',
@@ -411,7 +415,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'HaruAnnotation',
 			'HaruDestination',
 
-			// Ming
+			// Ming.
 			// @see http://php.net/book.ming
 			'SWFAction',
 			'SWFBitmap',
@@ -434,7 +438,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Process Control Extensions == */
-			// Ev
+			// Ev.
 			// @see http://php.net/book.ev
 			'Ev',
 			'EvCheck',
@@ -451,7 +455,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'EvTimer',
 			'EvWatcher',
 
-			// pthreads
+			// Pthreads.
 			// @see http://php.net/book.pthreads
 			'Threaded',
 			'Thread',
@@ -462,7 +466,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'Mutex',
 			'Cond',
 
-			// Sync
+			// Sync.
 			// @see http://php.net/book.sync
 			'SyncMutex',
 			'SyncSemaphore',
@@ -471,27 +475,26 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Other Basic Extensions == */
-			// FANN - Fast Artificial Neural Network
+			// FANN - Fast Artificial Neural Network.
 			// @see http://php.net/book.fann
 			'FANNConnection',
 
-			// JSON - JavaScript Object Notation
+			// JSON - JavaScript Object Notation.
 			// @see http://php.net/book.json
-			'JsonSerializable', // PHP 5.4.0+
+			'JsonSerializable', // PHP 5.4.0+.
 
-			// Judy - Judy Arrays
+			// Judy - Judy Arrays.
 			// @see http://php.net/book.judy
 			'Judy',
 
-			// Lua
+			// Lua.
 			// @see http://php.net/book.lua
 			'Lua',
 			'LuaClosure',
 
-			// SPL - Standard PHP Library (SPL)
+			// SPL - Standard PHP Library (SPL).
 			// @see http://php.net/book.spl
-
-				// SPL Data structures
+				// SPL Data structures.
 				'SplDoublyLinkedList',
 				'SplStack',
 				'SplQueue',
@@ -502,7 +505,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 				'SplFixedArray',
 				'SplObjectStorage',
 
-				// SPL Iterators
+				// SPL Iterators.
 				'AppendIterator',
 				'ArrayIterator',
 				'CachingIterator',
@@ -528,15 +531,15 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 				'RecursiveTreeIterator',
 				'RegexIterator',
 
-				'CachingRecursiveIterator', // Not in PHP docs - deprecated
+				'CachingRecursiveIterator', // Not in PHP docs - deprecated.
 
-				// SPL Interfaces
+				// SPL Interfaces.
 				'Countable',
 				'OuterIterator',
 				'RecursiveIterator',
 				'SeekableIterator',
 
-				// SPL Exceptions
+				// SPL Exceptions.
 				'BadFunctionCallException',
 				'BadMethodCallException',
 				'DomainException',
@@ -551,17 +554,17 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 				'UnderflowException',
 				'UnexpectedValueException',
 
-				// SPL File Handling
+				// SPL File Handling.
 				'SplFileInfo',
 				'SplFileObject',
 				'SplTempFileObject',
 
-				// SPL Miscellaneous Classes and Interfaces
+				// SPL Miscellaneous Classes and Interfaces.
 				'ArrayObject',
 				'SplObserver',
 				'SplSubject',
 
-			// SPL Types - SPL Type Handling
+			// SPL Types - SPL Type Handling.
 			// @see http://php.net/book.spl-types
 			'SplType',
 			'SplInt',
@@ -570,22 +573,22 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SplBool',
 			'SplString',
 
-			// Streams
+			// Streams.
 			// @see http://php.net/book.stream
 			'php_user_filter',
 			'streamWrapper',
 
-			// Tidy
+			// Tidy.
 			// @see http://php.net/book.tidy
 			'tidy',
 			'tidyNode',
 
-			// V8js - V8 Javascript Engine Integration
+			// V8js - V8 Javascript Engine Integration.
 			// @see http://php.net/book.v8js
 			'V8Js',
 			'V8JsException',
 
-			// Yaf
+			// Yaf.
 			// @see http://php.net/book.yaf
 			'Yaf_Application',
 			'Yaf_Bootstrap_Abstract',
@@ -633,15 +636,15 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'AMQPQueue',
 			'AMQPEnvelope',
 
-			// chdb - Constant hash database
+			// Chdb - Constant hash database.
 			// @see http://php.net/book.chdb
 			'chdb',
 
-			// Curl - Client URL Library
+			// Curl - Client URL Library.
 			// @see http://php.net/book.curl
 			'CURLFile',
 
-			// Event
+			// Event.
 			// @see http://php.net/book.event
 			'Event',
 			'EventBase',
@@ -656,7 +659,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'EventSslContext',
 			'EventUtil',
 
-			// Gearman
+			// Gearman.
 			// @see http://php.net/book.gearman
 			'GearmanClient',
 			'GearmanJob',
@@ -664,7 +667,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'GearmanWorker',
 			'GearmanException',
 
-			// HTTP
+			// HTTP.
 			// @see http://php.net/book.http
 			'HttpDeflateStream',
 			'HttpInflateStream',
@@ -674,7 +677,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'HttpRequestPool',
 			'HttpResponse',
 
-			// Hyperwave API
+			// Hyperwave API.
 			// @see http://php.net/book.hwapi
 			'hw_api',
 			'hw_api_attribute',
@@ -683,49 +686,49 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'hw_api_object',
 			'hw_api_reason',
 
-			// Memcache
+			// Memcache.
 			// @see http://php.net/book.memcache
 			'Memcache',
 
-			// Memcached
+			// Memcached.
 			// @see http://php.net/book.memcached
 			'Memcached',
 			'MemcachedException',
 
-			// RRD - RRDtool
+			// RRD - RRDtool.
 			// @see http://php.net/book.rrd
 			'RRDCreator',
 			'RRDGraph',
 			'RRDUpdater',
 
-			// Simple Asynchronous Messaging
+			// Simple Asynchronous Messaging.
 			// @see http://php.net/book.sam
 			'SAMConnection',
 			'SAMMessage',
 
-			// SNMP
+			// SNMP.
 			// @see http://php.net/book.snmp
 			'SNMP',
 			'SNMPException',
 
-			// Stomp - Stomp Client
+			// Stomp - Stomp Client.
 			// @see http://php.net/book.stomp
 			'Stomp',
 			'StompFrame',
 			'StompException',
 
-			// SVM - Support Vector Machine
+			// SVM - Support Vector Machine.
 			// @see http://php.net/book.svm
 			'SVM',
 			'SVMModel',
 
-			// Varnish
+			// Varnish.
 			// @see http://php.net/book.varnish
 			'VarnishAdmin',
 			'VarnishStat',
 			'VarnishLog',
 
-			// ZMQ - 0MQ messaging
+			// ZMQ - 0MQ messaging.
 			// @see http://php.net/book.zmq
 			'ZMQ',
 			'ZMQContext',
@@ -735,7 +738,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Search Engine Extensions == */
-			// Solr - Apache Solr
+			// Solr - Apache Solr.
 			// @see http://php.net/book.solr
 			'SolrUtils',
 			'SolrInputDocument',
@@ -758,13 +761,13 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SolrServerException',
 			'SolrIllegalArgumentException',
 			'SolrIllegalOperationException',
-			'SolrMissingMandatoryParameterException', // (No version information available, might only be in Git)
+			'SolrMissingMandatoryParameterException', // (No version information available, might only be in Git).
 
-			// Sphinx - Sphinx Client
+			// Sphinx - Sphinx Client.
 			// @see http://php.net/book.sphinx
 			'SphinxClient',
 
-			// Swish Indexing
+			// Swish Indexing.
 			// @see http://php.net/book.swish
 			'Swish',
 			'SwishResult',
@@ -775,7 +778,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			/* == Server Specific Extensions == */
 
 			/* == Session Extensions == */
-			// Sessions - Session Handling
+			// Sessions - Session Handling.
 			// @see http://php.net/book.session
 			'SessionHandler',
 			'SessionHandlerInterface',
@@ -784,14 +787,14 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			/* == Text Processing == */
 
 			/* == Variable and Type Related Extensions == */
-			// Quickhash
+			// Quickhash.
 			// @see http://php.net/book.quickhash
 			'QuickHashIntSet',
 			'QuickHashIntHash',
 			'QuickHashStringIntHash',
 			'QuickHashIntStringHash',
 
-			// Reflection
+			// Reflection.
 			// @see http://php.net/book.reflection
 			'Reflection',
 			'ReflectionClass',
@@ -803,26 +806,26 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'ReflectionObject',
 			'ReflectionParameter',
 			'ReflectionProperty',
-			'ReflectionType', // PHP 7.0.0+
-			'ReflectionGenerator', // PHP 7.0.0+
+			'ReflectionType',      // PHP 7.0.0+.
+			'ReflectionGenerator', // PHP 7.0.0+.
 			'Reflector',
 			'ReflectionException',
 
 
 			/* == Web Services == */
-			// OAuth
+			// OAuth.
 			// @see http://php.net/book.oauth
 			'OAuth',
 			'OAuthProvider',
 			'OAuthException',
 
-			// SCA
+			// SCA.
 			// @see http://php.net/book.sca
 			'SCA',
 			'SCA_LocalProxy',
 			'SCA_SoapProxy',
 
-			// SOAP
+			// SOAP.
 			// @see http://php.net/book.soap
 			'SoapClient',
 			'SoapServer',
@@ -831,7 +834,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SoapParam',
 			'SoapVar',
 
-			// YAR - Yet Another RPC Framework
+			// YAR - Yet Another RPC Framework.
 			// @see http://php.net/book.yar
 			'Yar_Server',
 			'Yar_Client',
@@ -842,18 +845,18 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			/* == Windows Only Extensions == */
 
-			// COM - COM and .Net (Windows)
+			// COM - COM and .Net (Windows).
 			// @see http://php.net/book.com
 			'COM',
 			'DOTNET',
 			'VARIANT',
-			'COMPersistHelper', // Not in PHP docs
-			'com_exception', // Not in PHP docs
-			'com_safearray_proxy', // Not in PHP docs
+			'COMPersistHelper',    // Not in PHP docs.
+			'com_exception',       // Not in PHP docs.
+			'com_safearray_proxy', // Not in PHP docs.
 
 
 			/* == XML Manipulation == */
-			// DOM - Document Object Model
+			// DOM - Document Object Model.
 			// @see http://php.net/book.dom
 			'DOMAttr',
 			'DOMCdataSection',
@@ -875,25 +878,25 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'DOMText',
 			'DOMXPath',
 
-			'DOMConfiguration', // Not in PHP docs
-			'DOMDocumentType', // Not in PHP docs
-			'DOMDomError', // Not in PHP docs
-			'DOMErrorHandler', // Not in PHP docs
-			'DOMImplementationList', // Not in PHP docs
-			'DOMImplementationSource', // Not in PHP docs
-			'DOMLocator', // Not in PHP docs
-			'DOMNameList', // Not in PHP docs
-			'DOMNameSpaceNode', // Not in PHP docs
-			'DOMStringExtend', // Not in PHP docs
-			'DOMStringList', // Not in PHP docs
-			'DOMTypeinfo', // Not in PHP docs
-			'DOMUserDataHandler', // Not in PHP docs
+			'DOMConfiguration',        // Not in PHP docs.
+			'DOMDocumentType',         // Not in PHP docs.
+			'DOMDomError',             // Not in PHP docs.
+			'DOMErrorHandler',         // Not in PHP docs.
+			'DOMImplementationList',   // Not in PHP docs.
+			'DOMImplementationSource', // Not in PHP docs.
+			'DOMLocator',              // Not in PHP docs.
+			'DOMNameList',             // Not in PHP docs.
+			'DOMNameSpaceNode',        // Not in PHP docs.
+			'DOMStringExtend',         // Not in PHP docs.
+			'DOMStringList',           // Not in PHP docs.
+			'DOMTypeinfo',             // Not in PHP docs.
+			'DOMUserDataHandler',      // Not in PHP docs.
 
-			// libxml
+			// Libxml.
 			// @see http://php.net/book.libxml
 			'libXMLError',
 
-			// Service Data Objects
+			// Service Data Objects.
 			// @see http://php.net/book.sdo
 			'SDO_DAS_ChangeSummary',
 			'SDO_DAS_DataFactory',
@@ -908,39 +911,40 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SDO_Model_Type',
 			'SDO_Sequence',
 
-			// SDO Relational Data Access Service
+			// SDO Relational Data Access Service.
 			// @see http://php.net/book.sdodasrel
 			'SDO_DAS_Relational',
 
-			// SDO XML Data Access Service
+			// SDO XML Data Access Service.
 			// @see http://php.net/book.sdo-das-xml
 			'SDO_DAS_XML',
 			'SDO_DAS_XML_Document',
 
-			// SimpleXML
+			// SimpleXML.
 			// @see http://php.net/book.simplexml
 			'SimpleXMLElement',
 			'SimpleXMLIterator',
 
-			// XMLDiff — XML diff and merge
+			// XMLDiff — XML diff and merge.
 			// @see http://php.net/book.xmldiff
 			'XMLDiff\Base',
 			'XMLDiff\DOM',
 			'XMLDiff\Memory',
 			'XMLDiff\File',
 
-			// XMLReader
+			// XMLReader.
 			// @see http://php.net/book.xmlreader
 			'XMLReader',
 
-			// XMLWriter
+			// XMLWriter.
 			// @see http://php.net/book.xmlwriter
 			'XMLWriter',
 
-			// XSL
+			// XSL.
 			// @see http://php.net/book.xsl
 			'XSLTProcessor',
 
 		);
-	} // End of class Debug_Bar_List_PHP_Classes
-} // End of if class_exists wrapper
+	} // End of class Debug_Bar_List_PHP_Classes.
+
+} // End of if class_exists wrapper.
