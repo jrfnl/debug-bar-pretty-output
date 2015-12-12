@@ -2,10 +2,6 @@
 <ruleset name="Debug Bar Pretty Output">
 	<description>The code standard for Debug Bar Pretty Output is WordPress.</description>
 
-	<!-- Exclude the codesniffer itself from checks. -->
-	<exclude-pattern>phpcs/*</exclude-pattern>
-	<exclude-pattern>wpcs/*</exclude-pattern>
-
 	<rule ref="WordPress">
 		<exclude name="WordPress.VIP" />
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
