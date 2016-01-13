@@ -555,5 +555,4 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 	if ( ! is_textdomain_loaded( 'db-pretty-output' ) ) {
 		load_plugin_textdomain( 'db-pretty-output', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
-
 } // End of if class_exists wrapper.
