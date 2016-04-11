@@ -12,7 +12,7 @@
  * @package    Debug Bar Pretty Output
  * @author     Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link       https://github.com/jrfnl/debug-bar-pretty-output
- * @version    1.5.2
+ * @version    1.6.0
  *
  * @copyright  2013-2016 Juliette Reinders Folmer
  * @license    http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 	 */
 	class Debug_Bar_Pretty_Output {
 
-		const VERSION = '1.5.2';
+		const VERSION = '1.6.0';
 
 		const NAME = 'db-pretty-output';
 
@@ -87,29 +87,29 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			$output = '';
 
-			if ( $space === '' ) {
+			if ( '' === $space ) {
 				$output .= '<div class="db-pretty-var">';
 			}
-			if ( is_string( $title ) && $title !== '' ) {
-				$output .= '<h4 style="clear: both;">' . ( ( $escape === true ) ? esc_html( $title ) : $title ) . "</h4>\n";
+			if ( is_string( $title ) && '' !== $title ) {
+				$output .= '<h4 style="clear: both;">' . ( ( true === $escape ) ? esc_html( $title ) : $title ) . "</h4>\n";
 			}
 
 			if ( is_array( $var ) ) {
-				if ( $var !== array() ) {
+				if ( ! empty( $var ) ) {
 					$output .= 'Array: <br />' . $space . '(<br />';
 					if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
 						$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', 'db-pretty-output' ), self::$limit_recursion ) . ')<br />';
 					}
 					else {
-						if ( $short !== true ) {
+						if ( true !== $short ) {
 							$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 						}
 						else {
 							$spacing = $space . '&nbsp;&nbsp;';
 						}
 						foreach ( $var as $key => $value ) {
-							$output .= $spacing . '[' . ( ( $escape === true ) ? esc_html( $key ) : $key );
-							if ( $short !== true ) {
+							$output .= $spacing . '[' . ( ( true === $escape ) ? esc_html( $key ) : $key );
+							if ( true !== $short ) {
 								$output .= ' ';
 								switch ( true ) {
 									case ( is_string( $key ) ) :
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 										break;
 
 									default:
-										$output .= '(' . __( 'unknown', 'db-pretty-output' ) .')';
+										$output .= '(' . __( 'unknown', 'db-pretty-output' ) . ')';
 										break;
 								}
 							}
@@ -142,65 +142,22 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				}
 			}
 			else if ( is_string( $var ) ) {
-				$output .= '<span style="color: #336600;">';
-				if ( $short !== true ) {
-					$output .= '<b><i>string[' . strlen( $var ) . ']</i></b> : ';
-				}
-				$output .= '&lsquo;'
-					. ( ( $escape === true ) ? str_replace( '  ', ' &nbsp;', esc_html( $var ) ) : str_replace( '  ', ' &nbsp;', $var ) )
-					. '&rsquo;</span><br />';
+				$output .= self::get_pretty_string( $var, $short, $escape );
 			}
 			else if ( is_bool( $var ) ) {
-				$output .= '<span style="color: #000099;">';
-				if ( $short !== true ) {
-					$output .= '<b><i>bool</i></b> : ' . $var . ' ( = ';
-				}
-				else {
-					$output .= '<b><i>b</i></b> ';
-				}
-				$output .= '<i>'
-					. ( ( $var === false ) ? '<span style="color: #FF0000;">false</span>' : ( ( $var === true ) ? '<span style="color: #336600;">true</span>' : __( 'undetermined', 'db-pretty-output' ) ) ) . ' </i>';
-				if ( $short !== true ) {
-					$output .= ')';
-				}
-				$output .= '</span><br />';
+				$output .= self::get_pretty_bool( $var, $short );
 			}
 			else if ( is_int( $var ) ) {
-				$output .= '<span style="color: #FF0000;">';
-				if ( $short !== true ) {
-					$output .= '<b><i>int</i></b> : ';
-				}
-				$output .= ( ( $var === 0 ) ? '<b>' . $var . '</b>' : $var ) . "</span><br />\n";
+				$output .= self::get_pretty_int( $var, $short );
 			}
 			else if ( is_float( $var ) ) {
-				$output .= '<span style="color: #990033;">';
-				if ( $short !== true ) {
-					$output .= '<b><i>float</i></b> : ';
-				}
-				$output .= $var
-					. '</span><br />';
+				$output .= self::get_pretty_float( $var, $short );
 			}
 			else if ( is_null( $var ) ) {
-				$output .= '<span style="color: #666666;">';
-				if ( $short !== true ) {
-					$output .= '<b><i>';
-				}
-				$output .= 'null';
-				if ( $short !== true ) {
-					$output .= '</i></b> : ' . $var . ' ( = <i>NULL</i> )';
-				}
-				$output .= '</span><br />';
+				$output .= self::get_pretty_null( $var, $short );
 			}
 			else if ( is_resource( $var ) ) {
-				$output .= '<span style="color: #666666;">';
-				if ( $short !== true ) {
-					$output .= '<b><i>resource</i></b> : ';
-				}
-				$output .= $var;
-				if ( $short !== true ) {
-					$output .= ' ( = <i>RESOURCE</i> )';
-				}
-				$output .= '</span><br />';
+				$output .= self::get_pretty_resource( $var, $short );
 			}
 			else if ( is_object( $var ) ) {
 				$output .= 'Object: <br />' . $space . '(<br />';
@@ -208,7 +165,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', 'db-pretty-output' ), self::$limit_recursion ) . ')<br />';
 				}
 				else {
-					if ( $short !== true ) {
+					if ( true !== $short ) {
 						$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 					}
 					else {
@@ -221,9 +178,179 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			else {
 				$output .= esc_html__( 'I haven\'t got a clue what this is: ', 'db-pretty-output' ) . gettype( $var ) . '<br />';
 			}
-			if ( $space === '' ) {
+			if ( '' === $space ) {
 				$output .= '</div>';
 			}
+
+			return $output;
+		}
+
+
+		/**
+		 * Convert a string to pretty output.
+		 *
+		 * @param string $string The string to make pretty.
+		 * @param bool   $short  Short or normal annotation.
+		 * @param bool   $escape Whether to character escape the textual output.
+		 *
+		 * @return string
+		 */
+		private static function get_pretty_string( $string, $short = false, $escape = true ) {
+			$output = '<span style="color: #336600;">';
+
+			if ( true !== $short ) {
+				$output .= '<b><i>string[' . strlen( $string ) . ']</i></b> : ';
+			}
+
+			$output .= '&lsquo;';
+			if ( true === $escape ) {
+				$output .= str_replace( '  ', ' &nbsp;', esc_html( $string ) );
+			}
+			else {
+				$output .= str_replace( '  ', ' &nbsp;', $string );
+			}
+			$output .= '&rsquo;</span><br />';
+
+			return $output;
+		}
+
+
+		/**
+		 * Convert a boolean to pretty output.
+		 *
+		 * @param bool $bool   The boolean variable to make pretty.
+		 * @param bool $short  Short or normal annotation.
+		 *
+		 * @return string
+		 */
+		private static function get_pretty_bool( $bool, $short = false ) {
+			$output = '<span style="color: #000099;">';
+
+			if ( true !== $short ) {
+				$output .= '<b><i>bool</i></b> : ' . $bool . ' ( = ';
+			}
+			else {
+				$output .= '<b><i>b</i></b> ';
+			}
+
+			$output .= '<i>';
+			if ( false === $bool ) {
+				$output .= '<span style="color: #FF0000;">false</span>';
+			}
+			elseif ( true === $bool ) {
+				$output .= '<span style="color: #336600;">true</span>';
+			}
+			else {
+				$output .= __( 'undetermined', 'db-pretty-output' );
+			}
+			$output .= ' </i>';
+
+			if ( true !== $short ) {
+				$output .= ')';
+			}
+
+			$output .= '</span><br />';
+
+			return $output;
+		}
+
+
+		/**
+		 * Convert an integer to pretty output.
+		 *
+		 * @param int  $int    The integer to make pretty.
+		 * @param bool $short  Short or normal annotation.
+		 *
+		 * @return string
+		 */
+		private static function get_pretty_int( $int, $short = false ) {
+			$output = '<span style="color: #FF0000;">';
+
+			if ( true !== $short ) {
+				$output .= '<b><i>int</i></b> : ';
+			}
+
+			if ( 0 === $int ) {
+				$output .= '<b>' . $int . '</b>';
+			}
+			else {
+				$output .= $int;
+			}
+			$output .= "</span><br />\n";
+
+			return $output;
+		}
+
+
+		/**
+		 * Convert a float to pretty output.
+		 *
+		 * @param float $float  The float to make pretty.
+		 * @param bool  $short  Short or normal annotation.
+		 *
+		 * @return string
+		 */
+		private static function get_pretty_float( $float, $short = false ) {
+			$output = '<span style="color: #990033;">';
+
+			if ( true !== $short ) {
+				$output .= '<b><i>float</i></b> : ';
+			}
+
+			$output .= $float . '</span><br />';
+
+			return $output;
+		}
+
+
+		/**
+		 * Convert a null value to pretty output.
+		 *
+		 * @param null $null   The null value to make pretty.
+		 * @param bool $short  Short or normal annotation.
+		 *
+		 * @return string
+		 */
+		private static function get_pretty_null( $null, $short = false ) {
+			$output = '<span style="color: #666666;">';
+
+			if ( true !== $short ) {
+				$output .= '<b><i>';
+			}
+
+			$output .= 'null';
+
+			if ( true !== $short ) {
+				$output .= '</i></b> : ' . $null . ' ( = <i>NULL</i> )';
+			}
+
+			$output .= '</span><br />';
+
+			return $output;
+		}
+
+		/**
+		 * Convert a resource to pretty output.
+		 *
+		 * @param resource $resource The resource to make pretty.
+		 * @param bool     $short    Short or normal annotation.
+		 *
+		 * @return string
+		 */
+		private static function get_pretty_resource( $resource, $short = false ) {
+			$output = '<span style="color: #666666;">';
+
+			if ( true !== $short ) {
+				$output .= '<b><i>resource</i></b> : ';
+			}
+
+			$output .= $resource;
+
+			if ( true !== $short ) {
+				$output .= ' ( = <i>RESOURCE</i> )';
+			}
+
+			$output .= '</span><br />';
 
 			return $output;
 		}
@@ -250,14 +377,14 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			$output = '';
 
 			$output .= $space . '<b><i>Class</i></b>: ' . esc_html( get_class( $obj ) ) . ' (<br />';
-			if ( $short !== true ) {
+			if ( true !== $short ) {
 				$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 			}
 			else {
 				$spacing = $space . '&nbsp;&nbsp;';
 			}
 			$properties = get_object_vars( $obj );
-			if ( is_array( $properties ) && $properties !== array() ) {
+			if ( ! empty( $properties ) && is_array( $properties ) ) {
 				foreach ( $properties as $var => $val ) {
 					if ( is_array( $val ) ) {
 						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . "<b><i> (array)</i></b>\n";
@@ -272,7 +399,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			unset( $properties, $var, $val );
 
 			$methods = get_class_methods( $obj );
-			if ( is_array( $methods ) && $methods !== array() ) {
+			if ( ! empty( $methods ) && is_array( $methods ) ) {
 				foreach ( $methods as $method ) {
 					$output .= $spacing . '<b><i>method</i></b>: ' . esc_html( $method ) . "<br />\n";
 				}
@@ -302,7 +429,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			$output = '';
 
-			if ( $is_sub === false ) {
+			if ( false === $is_sub ) {
 				$output .= '
 		<h2><span>' . esc_html__( 'Properties:', 'db-pretty-output' ) . '</span>' . count( $properties ) . '</h2>';
 
@@ -311,9 +438,9 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			}
 
 			// Properties.
-			if ( is_array( $properties ) && $properties !== array() ) {
+			if ( ! empty( $properties ) && is_array( $properties ) ) {
 				$h = 'h4';
-				if ( $is_sub === false ) {
+				if ( false === $is_sub ) {
 					$h = 'h3';
 				}
 
@@ -325,7 +452,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			}
 
 			// Methods.
-			if ( is_array( $methods ) && $methods !== array() ) {
+			if ( ! empty( $methods ) && is_array( $methods ) ) {
 				$output .= '
 		<h3>' . esc_html__( 'Object Methods:', 'db-pretty-output' ) . '</h3>
 		<ul class="' . sanitize_html_class( self::NAME ) . '">';
@@ -359,10 +486,10 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			$classes = 'debug-bar-table ' . sanitize_html_class( self::NAME );
 			if ( isset( $class ) ) {
-				if ( is_string( $class ) && $class !== '' ) {
+				if ( is_string( $class ) && '' !== $class ) {
 					$classes .= ' ' . sanitize_html_class( $class );
 				}
-				else if ( is_array( $class ) && $class !== array() ) {
+				else if ( ! empty( $class ) && is_array( $class ) ) {
 					$class   = array_map( $class, 'sanitize_html_class' );
 					$classes = $classes . ' ' . implode( ' ', $class );
 				}
@@ -392,7 +519,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		private static function get_table_start( $col1, $col2, $class = null, $double_it = false ) {
 			$class_string = '';
-			if ( is_string( $class ) && $class !== '' ) {
+			if ( is_string( $class ) && '' !== $class ) {
 				$class_string = ' class="' . esc_attr( $class ) . '"';
 			}
 			$output = '
@@ -404,7 +531,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			</tr>
 			</thead>';
 
-			if ( $double_it === true ) {
+			if ( true === $double_it ) {
 				$output .= '
 				<tfoot>
 				<tr>
