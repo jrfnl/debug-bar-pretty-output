@@ -100,14 +100,14 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					$output .= 'Array: <br />' . $space . '(<br />';
 					if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
 						$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', 'db-pretty-output' ), self::$limit_recursion ) . ')<br />';
-					}
-					else {
+
+					} else {
 						if ( true !== $short ) {
 							$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-						}
-						else {
+						} else {
 							$spacing = $space . '&nbsp;&nbsp;';
 						}
+
 						foreach ( $var as $key => $value ) {
 							$output .= $spacing . '[' . ( ( true === $escape ) ? esc_html( $key ) : $key );
 							if ( true !== $short ) {
@@ -137,46 +137,43 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					}
 
 					$output .= $space . ')<br />';
-				}
-				else {
+
+				} else {
 					$output .= 'array()<br />';
 				}
-			}
-			else if ( is_string( $var ) ) {
+			} elseif ( is_string( $var ) ) {
 				$output .= self::get_pretty_string( $var, $short, $escape );
-			}
-			else if ( is_bool( $var ) ) {
+
+			} elseif ( is_bool( $var ) ) {
 				$output .= self::get_pretty_bool( $var, $short );
-			}
-			else if ( is_int( $var ) ) {
+
+			} elseif ( is_int( $var ) ) {
 				$output .= self::get_pretty_int( $var, $short );
-			}
-			else if ( is_float( $var ) ) {
+
+			} elseif ( is_float( $var ) ) {
 				$output .= self::get_pretty_float( $var, $short );
-			}
-			else if ( is_null( $var ) ) {
+
+			} elseif ( is_null( $var ) ) {
 				$output .= self::get_pretty_null( $var, $short );
-			}
-			else if ( is_resource( $var ) ) {
+
+			} elseif ( is_resource( $var ) ) {
 				$output .= self::get_pretty_resource( $var, $short );
-			}
-			else if ( is_object( $var ) ) {
+
+			} elseif ( is_object( $var ) ) {
 				$output .= 'Object: <br />' . $space . '(<br />';
 				if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
 					$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', 'db-pretty-output' ), self::$limit_recursion ) . ')<br />';
-				}
-				else {
+				} else {
 					if ( true !== $short ) {
 						$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-					}
-					else {
+					} else {
 						$spacing = $space . '&nbsp;&nbsp;';
 					}
 					$output .= self::get_object_info( $var, $escape, $spacing, $short, ++$depth );
 				}
 				$output .= $space . ')<br /><br />';
-			}
-			else {
+
+			} else {
 				$output .= esc_html__( 'I haven\'t got a clue what this is: ', 'db-pretty-output' ) . gettype( $var ) . '<br />';
 			}
 			if ( '' === $space ) {
@@ -206,8 +203,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			$output .= '&lsquo;';
 			if ( true === $escape ) {
 				$output .= str_replace( '  ', ' &nbsp;', esc_html( $string ) );
-			}
-			else {
+			} else {
 				$output .= str_replace( '  ', ' &nbsp;', $string );
 			}
 			$output .= '&rsquo;</span><br />';
@@ -229,19 +225,16 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			if ( true !== $short ) {
 				$output .= '<b><i>bool</i></b> : ' . $bool . ' ( = ';
-			}
-			else {
+			} else {
 				$output .= '<b><i>b</i></b> ';
 			}
 
 			$output .= '<i>';
 			if ( false === $bool ) {
 				$output .= '<span style="color: #FF0000;">false</span>';
-			}
-			elseif ( true === $bool ) {
+			} elseif ( true === $bool ) {
 				$output .= '<span style="color: #336600;">true</span>';
-			}
-			else {
+			} else {
 				$output .= __( 'undetermined', 'db-pretty-output' );
 			}
 			$output .= ' </i>';
@@ -273,8 +266,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			if ( 0 === $int ) {
 				$output .= '<b>' . $int . '</b>';
-			}
-			else {
+			} else {
 				$output .= $int;
 			}
 			$output .= "</span><br />\n";
@@ -380,8 +372,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			$output .= $space . '<b><i>Class</i></b>: ' . esc_html( get_class( $obj ) ) . ' (<br />';
 			if ( true !== $short ) {
 				$spacing = $space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-			}
-			else {
+			} else {
 				$spacing = $space . '&nbsp;&nbsp;';
 			}
 			$properties = get_object_vars( $obj );
@@ -390,8 +381,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 					if ( is_array( $val ) ) {
 						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . "<b><i> (array)</i></b>\n";
 						$output .= self::get_output( $val, '', $escape, $spacing, $short, $depth );
-					}
-					else {
+					} else {
 						$output .= $spacing . '<b><i>property</i></b>: ' . esc_html( $var ) . ' = ';
 						$output .= self::get_output( $val, '', $escape, $spacing, $short, $depth );
 					}
@@ -489,8 +479,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			if ( isset( $class ) ) {
 				if ( is_string( $class ) && '' !== $class ) {
 					$classes .= ' ' . sanitize_html_class( $class );
-				}
-				else if ( ! empty( $class ) && is_array( $class ) ) {
+				} elseif ( ! empty( $class ) && is_array( $class ) ) {
 					$class   = array_map( $class, 'sanitize_html_class' );
 					$classes = $classes . ' ' . implode( ' ', $class );
 				}
@@ -580,8 +569,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 			if ( is_object( $value ) ) {
 				$output .= self::get_ooutput( $value, true );
-			}
-			else {
+			} else {
 				$output .= self::get_output( $value, '', true, '', false );
 			}
 
