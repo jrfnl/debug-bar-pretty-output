@@ -2,12 +2,14 @@
 <ruleset name="Debug Bar Pretty Output">
 	<description>The code standard for Debug Bar Pretty Output is WordPress.</description>
 
-	<rule ref="WordPress">
-		<exclude name="WordPress.VIP" />
+	<!-- ##### PHP cross-version compatibility ##### -->
+	<config name="testVersion" value="5.2-99.0"/>
+	<rule ref="PHPCompatibility"/>
 
-		<!-- else on new line is perfectly fine -->
-		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace" />
-	</rule>
+
+	<!-- ##### WordPress sniffs #####-->
+	<rule ref="WordPress" />
+
 
 	<!-- Add `PHP_Classes` to the whitelist for non-snakecase variable names. -->
 	<rule ref="WordPress.NamingConventions.ValidVariableName">
@@ -15,7 +17,7 @@
 	        <property name="customVariablesWhitelist" value="PHP_classes" type="array" />
 	    </properties>
 
-		<!-- TEMPORARY! Exclude a file until WPCS/PR #558 has been merged. -->
+		<!-- TEMPORARY! Exclude a file until WPCS/PR #671 has been merged. -->
 		<exclude-pattern>class-debug-bar-list-php-classes.php</exclude-pattern>
 	</rule>
 
