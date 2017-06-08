@@ -256,9 +256,9 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 				// SQLLite.
 				// @see http://php.net/ref.sqlite
 				'SQLiteDatabase',  // Not easy to find in PHP docs.
-				'SQLiteResult',  // Not easy to find  in PHP docs.
-				'SQLiteUnbuffered',  // Not easy to find  in PHP docs.
-				'SQLiteException',	// Not easy to find  in PHP docs.
+				'SQLiteResult',  // Not easy to find in PHP docs.
+				'SQLiteUnbuffered',  // Not easy to find in PHP docs.
+				'SQLiteException',	// Not easy to find in PHP docs.
 
 				// SQLite3.
 				// @see http://php.net/book.sqlite3
