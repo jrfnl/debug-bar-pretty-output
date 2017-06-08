@@ -925,7 +925,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SimpleXMLElement',
 			'SimpleXMLIterator',
 
-			// XMLDiff — XML diff and merge.
+			// XMLDiff - XML diff and merge.
 			// @see http://php.net/book.xmldiff
 			'XMLDiff\Base',
 			'XMLDiff\DOM',
