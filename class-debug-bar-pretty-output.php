@@ -99,6 +99,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 				if ( ! empty( $var ) ) {
 					$output .= 'Array: <br />' . $space . '(<br />';
 					if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
+						/* translators: %d = number used as a limit. */
 						$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', 'db-pretty-output' ), self::$limit_recursion ) . ')<br />';
 
 					} else {
@@ -162,6 +163,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			} elseif ( is_object( $var ) ) {
 				$output .= 'Object: <br />' . $space . '(<br />';
 				if ( is_int( self::$limit_recursion ) && $depth > self::$limit_recursion ) {
+					/* translators: %d = number used as a limit. */
 					$output .= '... ( ' . sprintf( __( 'output limited at recursion depth %d', 'db-pretty-output' ), self::$limit_recursion ) . ')<br />';
 				} else {
 					if ( true !== $short ) {
@@ -665,10 +667,10 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 *
 		 * @deprecated since v1.3 in favour of get_table().
 		 *
-		 * @param array        $array  	   Array to be shown in the table.
-		 * @param string       $col1   	   Label for the first table column.
+		 * @param array        $array      Array to be shown in the table.
+		 * @param string       $col1       Label for the first table column.
 		 * @param string       $col2       Label for the second table column.
-		 * @param string|array $class  	   One or more CSS classes to add to the table.
+		 * @param string|array $class      One or more CSS classes to add to the table.
 		 * @param string       $deprecated ==Deprecated argument.
 		 *
 		 * @return void
