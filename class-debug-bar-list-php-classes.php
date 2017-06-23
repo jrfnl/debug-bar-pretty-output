@@ -124,155 +124,155 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			/* == Database Extensions == */
 
-				/* = Abstraction Layers = */
-				// PDO.
-				// @see http://php.net/book.pdo
-				'PDO',
-				'PDOStatement',
-				'PDOException',
-				'PDORow',  // Not in PHP docs.
+			/* = Abstraction Layers = */
+			// PDO.
+			// @see http://php.net/book.pdo
+			'PDO',
+			'PDOStatement',
+			'PDOException',
+			'PDORow',  // Not in PHP docs.
 
 
-				/* = Vendor Specific Database Extensions = */
-				// Mongo.
-				// @see http://php.net/book.mongo
-					// Mongo Core Classes.
-					'MongoClient',
-					'MongoDB',
-					'MongoCollection',
-					'MongoCursor',
-					'MongoCursorInterface',
-					'MongoCommandCursor',
+			/* = Vendor Specific Database Extensions = */
+			// Mongo.
+			// @see http://php.net/book.mongo
+			// Mongo Core Classes.
+			'MongoClient',
+			'MongoDB',
+			'MongoCollection',
+			'MongoCursor',
+			'MongoCursorInterface',
+			'MongoCommandCursor',
 
-					// Mongo Types.
-					'MongoId',
-					'MongoCode',
-					'MongoDate',
-					'MongoRegex',
-					'MongoBinData',
-					'MongoInt32',
-					'MongoInt64',
-					'MongoDBRef',
-					'MongoMinKey',
-					'MongoMaxKey',
-					'MongoTimestamp',
+			// Mongo Types.
+			'MongoId',
+			'MongoCode',
+			'MongoDate',
+			'MongoRegex',
+			'MongoBinData',
+			'MongoInt32',
+			'MongoInt64',
+			'MongoDBRef',
+			'MongoMinKey',
+			'MongoMaxKey',
+			'MongoTimestamp',
 
-					// Mongo GridFS Classes.
-					'MongoGridFS',
-					'MongoGridFSFile',
-					'MongoGridFSCursor',
+			// Mongo GridFS Classes.
+			'MongoGridFS',
+			'MongoGridFSFile',
+			'MongoGridFSCursor',
 
-					// Mongo Batch Classes.
-					'MongoWriteBatch',
-					'MongoInsertBatch',
-					'MongoUpdateBatch',
-					'MongoDeleteBatch',
+			// Mongo Batch Classes.
+			'MongoWriteBatch',
+			'MongoInsertBatch',
+			'MongoUpdateBatch',
+			'MongoDeleteBatch',
 
-					// Mongo Miscellaneous.
-					'MongoLog',
-					'MongoPool',
-					'Mongo',
+			// Mongo Miscellaneous.
+			'MongoLog',
+			'MongoPool',
+			'Mongo',
 
-					// Mongo Exceptions.
-					'MongoException',
-					'MongoResultException',
-					'MongoCursorException',
-					'MongoCursorTimeoutException',
-					'MongoConnectionException',
-					'MongoGridFSException',
-					'MongoDuplicateKeyException',
-					'MongoProtocolException',
-					'MongoExecutionTimeoutException',
-					'MongoWriteConcernException',
+			// Mongo Exceptions.
+			'MongoException',
+			'MongoResultException',
+			'MongoCursorException',
+			'MongoCursorTimeoutException',
+			'MongoConnectionException',
+			'MongoGridFSException',
+			'MongoDuplicateKeyException',
+			'MongoProtocolException',
+			'MongoExecutionTimeoutException',
+			'MongoWriteConcernException',
 
-				// PHP driver for MongoDB.
-				// @see http://php.net/set.mongodb
-					// MongoDB\Driver.
-					'MongoDB\Driver\Manager',
-					'MongoDB\Driver\Command',
-					'MongoDB\Driver\Query',
-					'MongoDB\Driver\BulkWrite',
-					'MongoDB\Driver\WriteConcern',
-					'MongoDB\Driver\ReadPreference',
-					'MongoDB\Driver\Cursor',
-					'MongoDB\Driver\CursorId',
-					'MongoDB\Driver\Server',
-					'MongoDB\Driver\WriteConcernError',
-					'MongoDB\Driver\WriteError',
-					'MongoDB\Driver\WriteResult',
+			// PHP driver for MongoDB.
+			// @see http://php.net/set.mongodb
+			// MongoDB\Driver.
+			'MongoDB\Driver\Manager',
+			'MongoDB\Driver\Command',
+			'MongoDB\Driver\Query',
+			'MongoDB\Driver\BulkWrite',
+			'MongoDB\Driver\WriteConcern',
+			'MongoDB\Driver\ReadPreference',
+			'MongoDB\Driver\Cursor',
+			'MongoDB\Driver\CursorId',
+			'MongoDB\Driver\Server',
+			'MongoDB\Driver\WriteConcernError',
+			'MongoDB\Driver\WriteError',
+			'MongoDB\Driver\WriteResult',
 
-					// BSON.
-					'MongoDB\BSON\Binary',
-					'MongoDB\BSON\Javascript',
-					'MongoDB\BSON\MaxKey',
-					'MongoDB\BSON\MinKey',
-					'MongoDB\BSON\ObjectID',
-					'MongoDB\BSON\Regex',
-					'MongoDB\BSON\Timestamp',
-					'MongoDB\BSON\UTCDatetime',
-					'MongoDB\BSON\Type',
-					'MongoDB\BSON\Persistable',
-					'MongoDB\BSON\Serializable',
-					'MongoDB\BSON\Unserializable',
+			// BSON.
+			'MongoDB\BSON\Binary',
+			'MongoDB\BSON\Javascript',
+			'MongoDB\BSON\MaxKey',
+			'MongoDB\BSON\MinKey',
+			'MongoDB\BSON\ObjectID',
+			'MongoDB\BSON\Regex',
+			'MongoDB\BSON\Timestamp',
+			'MongoDB\BSON\UTCDatetime',
+			'MongoDB\BSON\Type',
+			'MongoDB\BSON\Persistable',
+			'MongoDB\BSON\Serializable',
+			'MongoDB\BSON\Unserializable',
 
-					// MongoDB Exceptions.
-					'MongoDB\Driver\Exception\AuthenticationException',
-					'MongoDB\Driver\Exception\BulkWriteException',
-					'MongoDB\Driver\Exception\ConnectionException',
-					'MongoDB\Driver\Exception\ConnectionTimeoutException',
-					'MongoDB\Driver\Exception\Exception',
-					'MongoDB\Driver\Exception\ExecutionTimeoutException',  // (No version information available, might only be in Git).
-					'MongoDB\Driver\Exception\InvalidArgumentException',
-					'MongoDB\Driver\Exception\LogicException',
-					'MongoDB\Driver\Exception\RuntimeException',
-					'MongoDB\Driver\Exception\SSLConnectionException',
-					'MongoDB\Driver\Exception\UnexpectedValueException',
-					'MongoDB\Driver\Exception\WriteException',
+			// MongoDB Exceptions.
+			'MongoDB\Driver\Exception\AuthenticationException',
+			'MongoDB\Driver\Exception\BulkWriteException',
+			'MongoDB\Driver\Exception\ConnectionException',
+			'MongoDB\Driver\Exception\ConnectionTimeoutException',
+			'MongoDB\Driver\Exception\Exception',
+			'MongoDB\Driver\Exception\ExecutionTimeoutException',  // (No version information available, might only be in Git).
+			'MongoDB\Driver\Exception\InvalidArgumentException',
+			'MongoDB\Driver\Exception\LogicException',
+			'MongoDB\Driver\Exception\RuntimeException',
+			'MongoDB\Driver\Exception\SSLConnectionException',
+			'MongoDB\Driver\Exception\UnexpectedValueException',
+			'MongoDB\Driver\Exception\WriteException',
 
-					'MongoDB\Driver\DuplicateKeyException', // No longer in the manual, possibly deprecated ?
-					'MongoDB\Driver\WriteConcernException', // No longer in the manual, possibly deprecated ?
+			'MongoDB\Driver\DuplicateKeyException', // No longer in the manual, possibly deprecated ?
+			'MongoDB\Driver\WriteConcernException', // No longer in the manual, possibly deprecated ?
 
-				// MySQL.
-				// @see http://php.net/set.mysqlinfo
-					// Mysqli - MySQL Improved Extension.
-					// @see http://php.net/book.mysqli
-					'mysqli',
-					'mysqli_stmt',
-					'mysqli_result',
-					'mysqli_driver',
-					'mysqli_warning',
-					'mysqli_sql_exception',
+			// MySQL.
+			// @see http://php.net/set.mysqlinfo
+			// Mysqli - MySQL Improved Extension.
+			// @see http://php.net/book.mysqli
+			'mysqli',
+			'mysqli_stmt',
+			'mysqli_result',
+			'mysqli_driver',
+			'mysqli_warning',
+			'mysqli_sql_exception',
 
-					// Mysqlnd_uh - Mysqlnd user handler plugin.
-					// @see http://php.net/book.mysqlnd-uh
-					'MysqlndUhConnection',
-					'MysqlndUhPreparedStatement',
+			// Mysqlnd_uh - Mysqlnd user handler plugin.
+			// @see http://php.net/book.mysqlnd-uh
+			'MysqlndUhConnection',
+			'MysqlndUhPreparedStatement',
 
-				// OCI8 - Oracle OCI8.
-				// @see http://php.net/book.oci8
-				'OCI-Collection',
-				'OCI-Lob',
+			// OCI8 - Oracle OCI8.
+			// @see http://php.net/book.oci8
+			'OCI-Collection',
+			'OCI-Lob',
 
-				// SQLLite.
-				// @see http://php.net/ref.sqlite
-				'SQLiteDatabase',  // Not easy to find in PHP docs.
-				'SQLiteResult',  // Not easy to find in PHP docs.
-				'SQLiteUnbuffered',  // Not easy to find in PHP docs.
-				'SQLiteException',	// Not easy to find in PHP docs.
+			// SQLLite.
+			// @see http://php.net/ref.sqlite
+			'SQLiteDatabase',   // Not easy to find in PHP docs.
+			'SQLiteResult',     // Not easy to find in PHP docs.
+			'SQLiteUnbuffered', // Not easy to find in PHP docs.
+			'SQLiteException',  // Not easy to find in PHP docs.
 
-				// SQLite3.
-				// @see http://php.net/book.sqlite3
-				'SQLite3',
-				'SQLite3Stmt',
-				'SQLite3Result',
+			// SQLite3.
+			// @see http://php.net/book.sqlite3
+			'SQLite3',
+			'SQLite3Stmt',
+			'SQLite3Result',
 
-				// Tokyo_tyrant.
-				// @see http://php.net/book.tokyo-tyrant
-				'TokyoTyrant',
-				'TokyoTyrantTable',
-				'TokyoTyrantQuery',
-				'TokyoTyrantIterator',
-				'TokyoTyrantException',
+			// Tokyo_tyrant.
+			// @see http://php.net/book.tokyo-tyrant
+			'TokyoTyrant',
+			'TokyoTyrantTable',
+			'TokyoTyrantQuery',
+			'TokyoTyrantIterator',
+			'TokyoTyrantException',
 
 
 			/* == Date and Time Related Extensions == */
@@ -494,75 +494,75 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			// SPL - Standard PHP Library (SPL).
 			// @see http://php.net/book.spl
-				// SPL Data structures.
-				'SplDoublyLinkedList',
-				'SplStack',
-				'SplQueue',
-				'SplHeap',
-				'SplMaxHeap',
-				'SplMinHeap',
-				'SplPriorityQueue',
-				'SplFixedArray',
-				'SplObjectStorage',
+			// SPL Data structures.
+			'SplDoublyLinkedList',
+			'SplStack',
+			'SplQueue',
+			'SplHeap',
+			'SplMaxHeap',
+			'SplMinHeap',
+			'SplPriorityQueue',
+			'SplFixedArray',
+			'SplObjectStorage',
 
-				// SPL Iterators.
-				'AppendIterator',
-				'ArrayIterator',
-				'CachingIterator',
-				'CallbackFilterIterator',
-				'DirectoryIterator',
-				'EmptyIterator',
-				'FilesystemIterator',
-				'FilterIterator',
-				'GlobIterator',
-				'InfiniteIterator',
-				'IteratorIterator',
-				'LimitIterator',
-				'MultipleIterator',
-				'NoRewindIterator',
-				'ParentIterator',
-				'RecursiveArrayIterator',
-				'RecursiveCachingIterator',
-				'RecursiveCallbackFilterIterator',
-				'RecursiveDirectoryIterator',
-				'RecursiveFilterIterator',
-				'RecursiveIteratorIterator',
-				'RecursiveRegexIterator',
-				'RecursiveTreeIterator',
-				'RegexIterator',
+			// SPL Iterators.
+			'AppendIterator',
+			'ArrayIterator',
+			'CachingIterator',
+			'CallbackFilterIterator',
+			'DirectoryIterator',
+			'EmptyIterator',
+			'FilesystemIterator',
+			'FilterIterator',
+			'GlobIterator',
+			'InfiniteIterator',
+			'IteratorIterator',
+			'LimitIterator',
+			'MultipleIterator',
+			'NoRewindIterator',
+			'ParentIterator',
+			'RecursiveArrayIterator',
+			'RecursiveCachingIterator',
+			'RecursiveCallbackFilterIterator',
+			'RecursiveDirectoryIterator',
+			'RecursiveFilterIterator',
+			'RecursiveIteratorIterator',
+			'RecursiveRegexIterator',
+			'RecursiveTreeIterator',
+			'RegexIterator',
 
-				'CachingRecursiveIterator', // Not in PHP docs - deprecated.
+			'CachingRecursiveIterator', // Not in PHP docs - deprecated.
 
-				// SPL Interfaces.
-				'Countable',
-				'OuterIterator',
-				'RecursiveIterator',
-				'SeekableIterator',
+			// SPL Interfaces.
+			'Countable',
+			'OuterIterator',
+			'RecursiveIterator',
+			'SeekableIterator',
 
-				// SPL Exceptions.
-				'BadFunctionCallException',
-				'BadMethodCallException',
-				'DomainException',
-				'InvalidArgumentException',
-				'LengthException',
-				'LogicException',
-				'OutOfBoundsException',
-				'OutOfRangeException',
-				'OverflowException',
-				'RangeException',
-				'RuntimeException',
-				'UnderflowException',
-				'UnexpectedValueException',
+			// SPL Exceptions.
+			'BadFunctionCallException',
+			'BadMethodCallException',
+			'DomainException',
+			'InvalidArgumentException',
+			'LengthException',
+			'LogicException',
+			'OutOfBoundsException',
+			'OutOfRangeException',
+			'OverflowException',
+			'RangeException',
+			'RuntimeException',
+			'UnderflowException',
+			'UnexpectedValueException',
 
-				// SPL File Handling.
-				'SplFileInfo',
-				'SplFileObject',
-				'SplTempFileObject',
+			// SPL File Handling.
+			'SplFileInfo',
+			'SplFileObject',
+			'SplTempFileObject',
 
-				// SPL Miscellaneous Classes and Interfaces.
-				'ArrayObject',
-				'SplObserver',
-				'SplSubject',
+			// SPL Miscellaneous Classes and Interfaces.
+			'ArrayObject',
+			'SplObserver',
+			'SplSubject',
 
 			// SPL Types - SPL Type Handling.
 			// @see http://php.net/book.spl-types
