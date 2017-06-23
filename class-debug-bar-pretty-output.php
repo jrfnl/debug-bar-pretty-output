@@ -187,6 +187,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		/**
 		 * Convert a string to pretty output.
 		 *
+		 * @since 1.6.0
+		 *
 		 * @param string $string The string to make pretty.
 		 * @param bool   $short  Short or normal annotation.
 		 * @param bool   $escape Whether to character escape the textual output.
@@ -214,6 +216,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 		/**
 		 * Convert a boolean to pretty output.
+		 *
+		 * @since 1.6.0
 		 *
 		 * @param bool $bool   The boolean variable to make pretty.
 		 * @param bool $short  Short or normal annotation.
@@ -252,6 +256,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		/**
 		 * Convert an integer to pretty output.
 		 *
+		 * @since 1.6.0
+		 *
 		 * @param int  $int    The integer to make pretty.
 		 * @param bool $short  Short or normal annotation.
 		 *
@@ -278,6 +284,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		/**
 		 * Convert a float to pretty output.
 		 *
+		 * @since 1.6.0
+		 *
 		 * @param float $float  The float to make pretty.
 		 * @param bool  $short  Short or normal annotation.
 		 *
@@ -298,6 +306,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 		/**
 		 * Convert a null value to pretty output.
+		 *
+		 * @since 1.6.0
 		 *
 		 * @param null $null   The null value to make pretty.
 		 * @param bool $short  Short or normal annotation.
@@ -324,6 +334,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 
 		/**
 		 * Convert a resource to pretty output.
+		 *
+		 * @since 1.6.0
 		 *
 		 * @param resource $resource The resource to make pretty.
 		 * @param bool     $short    Short or normal annotation.
