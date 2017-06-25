@@ -194,6 +194,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'MongoDB\Driver\BulkWrite',
 			'MongoDB\Driver\WriteConcern',
 			'MongoDB\Driver\ReadPreference',
+			'MongoDB\Driver\ReadConcern',
 			'MongoDB\Driver\Cursor',
 			'MongoDB\Driver\CursorId',
 			'MongoDB\Driver\Server',
@@ -203,6 +204,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			// BSON.
 			'MongoDB\BSON\Binary',
+			'MongoDB\BSON\Decimal128',
 			'MongoDB\BSON\Javascript',
 			'MongoDB\BSON\MaxKey',
 			'MongoDB\BSON\MinKey',
@@ -280,7 +282,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			// @see http://php.net/book.datetime
 			'DateTime',
 			'DateTimeImmutable', // PHP 5.5.0+.
-			'DateTimeInterface', // PHP 5.5.0+.
+			'DateTimeInterface', // PHP 5.5.0+ (interface, not class).
 			'DateTimeZone',
 			'DateInterval',
 			'DatePeriod',
@@ -460,7 +462,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'Threaded',
 			'Thread',
 			'Worker',
-			'Collectable',
+			'Collectable', // Interface.
 			'Pool',
 			'Stackable', // No longer available ?
 			'Mutex',
@@ -472,6 +474,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SyncSemaphore',
 			'SyncEvent',
 			'SyncReaderWriter',
+			'SyncSharedMemory',
 
 
 			/* == Other Basic Extensions == */
@@ -481,7 +484,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 			// JSON - JavaScript Object Notation.
 			// @see http://php.net/book.json
-			'JsonSerializable', // PHP 5.4.0+.
+			'JsonSerializable', // PHP 5.4.0+ (interface, not class).
 
 			// Judy - Judy Arrays.
 			// @see http://php.net/book.judy
@@ -629,13 +632,6 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Other Services == */
-			// AMQP - Deprecated ?
-			'AMQPConnection',
-			'AMQPChannel',
-			'AMQPExchange',
-			'AMQPQueue',
-			'AMQPEnvelope',
-
 			// Chdb - Constant hash database.
 			// @see http://php.net/book.chdb
 			'chdb',
@@ -666,16 +662,6 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'GearmanTask',
 			'GearmanWorker',
 			'GearmanException',
-
-			// HTTP.
-			// @see http://php.net/book.http
-			'HttpDeflateStream',
-			'HttpInflateStream',
-			'HttpMessage',
-			'HttpQueryString',
-			'HttpRequest',
-			'HttpRequestPool',
-			'HttpResponse',
 
 			// Hyperwave API.
 			// @see http://php.net/book.hwapi
@@ -736,6 +722,10 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'ZMQPoll',
 			'ZMQDevice',
 
+			// ZooKeeper.
+			// @see http://php.net/book.zookeeper
+			'ZooKeeper',
+
 
 			/* == Search Engine Extensions == */
 			// Solr - Apache Solr.
@@ -787,6 +777,21 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			/* == Text Processing == */
 
 			/* == Variable and Type Related Extensions == */
+			// Data Structures.
+			// PECL icm PHP 7.
+			// @see http://php.net/book.ds
+			'Ds\Collection', // Interface.
+			'Ds\Hashable',   // Interface.
+			'Ds\Sequence',   // Interface.
+			'Ds\Vector',
+			'Ds\Deque',
+			'Ds\Map',
+			'Ds\Pair',
+			'Ds\Set',
+			'Ds\Stack',
+			'Ds\Queue',
+			'Ds\PriorityQueue',
+
 			// Quickhash.
 			// @see http://php.net/book.quickhash
 			'QuickHashIntSet',
@@ -944,6 +949,57 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			// @see http://php.net/book.xsl
 			'XSLTProcessor',
 
+
+			/* == GUI Extensions == */
+			// UI - PHP7+ & PECL.
+			// @see http://php.net/book.ui
+			'UI\Point',
+			'UI\Size',
+			'UI\Window',
+			'UI\Control',
+			'UI\Menu',
+			'UI\MenuItem',
+			'UI\Area',
+			'UI\Executor',
+			'UI\Controls\Tab',
+			'UI\Controls\Check',
+			'UI\Controls\Button',
+			'UI\Controls\ColorButton',
+			'UI\Controls\Label',
+			'UI\Controls\Entry',
+			'UI\Controls\MultilineEntry',
+			'UI\Controls\Spin',
+			'UI\Controls\Slider',
+			'UI\Controls\Progress',
+			'UI\Controls\Separator',
+			'UI\Controls\Combo',
+			'UI\Controls\EditableCombo',
+			'UI\Controls\Radio',
+			'UI\Controls\Picker',
+			'UI\Controls\Form',
+			'UI\Controls\Grid',
+			'UI\Controls\Group',
+			'UI\Controls\Box',
+			'UI\Draw\Pen',
+			'UI\Draw\Path',
+			'UI\Draw\Matrix',
+			'UI\Draw\Color',
+			'UI\Draw\Stroke',
+			'UI\Draw\Brush',
+			'UI\Draw\Brush\Gradient',
+			'UI\Draw\Brush\LinearGradient',
+			'UI\Draw\Brush\RadialGradient',
+			'UI\Draw\Text\Layout',
+			'UI\Draw\Text\Font',
+			'UI\Draw\Text\Font\Descriptor',
+			'UI\Draw\Text\Font\Weight',
+			'UI\Draw\Text\Font\Italic',
+			'UI\Draw\Text\Font\Stretch',
+			'UI\Draw\Line\Cap',
+			'UI\Draw\Line\Join',
+			'UI\Key',
+			'UI\Exception\InvalidArgumentException',
+			'UI\Exception\RuntimeException',
 		);
 	} // End of class Debug_Bar_List_PHP_Classes.
 
