@@ -114,15 +114,15 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 							if ( true !== $short ) {
 								$output .= ' ';
 								switch ( true ) {
-									case ( is_string( $key ) ) :
+									case ( is_string( $key ) ):
 										$output .= '<span style="color: #336600;;"><b><i>(string)</i></b></span>';
 										break;
 
-									case ( is_int( $key ) ) :
+									case ( is_int( $key ) ):
 										$output .= '<span style="color: #FF0000;"><b><i>(int)</i></b></span>';
 										break;
 
-									case ( is_float( $key ) ) :
+									case ( is_float( $key ) ):
 										$output .= '<span style="color: #990033;"><b><i>(float)</i></b></span>';
 										break;
 
