@@ -9,9 +9,9 @@
  * @package    Debug Bar Pretty Output
  * @author     Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link       https://github.com/jrfnl/debug-bar-pretty-output
- * @version    1.7.0
+ * @version    1.8.0
  *
- * @copyright  2013-2017 Juliette Reinders Folmer
+ * @copyright  2013-2018 Juliette Reinders Folmer
  * @license    http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher.
  */
 
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 	/**
 	 * This class does nothing, just a way to keep the list of php classes out of the global namespace
 	 * You can retrieve the list by using the static variable Debug_Bar_List_PHP_Classes::$PHP_classes
-	 * List last updated: 2015-12-05 (just after PHP 7.0.0 release).
+	 * List last updated: 2018-01-15 (after PHP 7.2.1 release).
 	 *
 	 * @todo - maybe make parts of the list flexible based on extension_loaded().
 	 */
