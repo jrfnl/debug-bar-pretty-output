@@ -1,0 +1,33 @@
+{
+  "name": "jrfnl/debug-bar-pretty-output",
+  "description": "Helper class for WordPress Debug Bar plugins.",
+  "homepage": "https://github.com/jrfnl/debug-bar-pretty-output",
+  "keywords": ["wordpress","debug-bar","debug"],
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Juliette Reinders Folmer",
+      "homepage": "https://github.com/jrfnl",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/jrfnl/debug-bar-pretty-output/issues",
+    "source": "https://github.com/jrfnl/debug-bar-pretty-output"
+  },
+  "require": {
+    "php": ">=5.2"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3",
+    "squizlabs/php_codesniffer": "^3.2",
+    "wimg/php-compatibility": "^8.1",
+    "wp-coding-standards/wpcs": "~0.14.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "Debug_Bar_Pretty_Output": "",
+      "Debug_Bar_List_PHP_Classes": ""
+	}
+  }
+}
