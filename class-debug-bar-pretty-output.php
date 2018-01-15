@@ -13,9 +13,9 @@
  * @package    Debug Bar Pretty Output
  * @author     Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link       https://github.com/jrfnl/debug-bar-pretty-output
- * @version    1.7.0
+ * @version    1.8.0
  *
- * @copyright  2013-2017 Juliette Reinders Folmer
+ * @copyright  2013-2018 Juliette Reinders Folmer
  * @license    http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher.
  */
 
@@ -26,7 +26,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 	 */
 	class Debug_Bar_Pretty_Output {
 
-		const VERSION = '1.7.0';
+		const VERSION = '1.8.0';
 
 		const NAME = 'db-pretty-output';
 
@@ -76,11 +76,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @since 1.3
 		 *
 		 * @param mixed  $var    Variable to show.
-		 * @param string $title  (optional) Variable title.
-		 * @param bool   $escape (optional) Whether to character escape the textual output.
-		 * @param string $space  (internal) Indentation spacing.
-		 * @param bool   $short  (internal) Short or normal annotation.
-		 * @param int    $depth  (internal) The depth of the current recursion.
+		 * @param string $title  Optional. Variable title.
+		 * @param bool   $escape Optional. Whether to character escape the textual output.
+		 * @param string $space  Internal. Indentation spacing.
+		 * @param bool   $short  Internal. Short or normal annotation.
+		 * @param int    $depth  Internal. The depth of the current recursion.
 		 *
 		 * @return string
 		 */
@@ -372,10 +372,10 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @since 1.3
 		 *
 		 * @param object $obj    Object to show.
-		 * @param bool   $escape (internal) Whether to character escape the textual output.
-		 * @param string $space  (internal) Indentation spacing.
-		 * @param bool   $short  (internal) Short or normal annotation.
-		 * @param int    $depth  (internal) The depth of the current recursion.
+		 * @param bool   $escape Internal. Whether to character escape the textual output.
+		 * @param string $space  Internal. Indentation spacing.
+		 * @param bool   $short  Internal. Short or normal annotation.
+		 * @param int    $depth  Internal. The depth of the current recursion.
 		 *
 		 * @return string
 		 */
@@ -424,7 +424,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @since 1.3
 		 *
 		 * @param object $obj    Object for which to show the properties and methods.
-		 * @param bool   $is_sub (internal) Top level or nested object.
+		 * @param bool   $is_sub Internal. Top level or nested object.
 		 *
 		 * @reurn string
 		 */
@@ -613,11 +613,11 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @deprecated since v1.3 in favour of get_output().
 		 *
 		 * @param mixed  $var        Variable to show.
-		 * @param string $title      (optional) Variable title.
-		 * @param bool   $escape     (optional) Whether to character escape the textual output.
-		 * @param string $space      (internal) Indentation spacing.
-		 * @param bool   $short      (internal) Short or normal annotation.
-		 * @param string $deprecated ==Deprecated argument.
+		 * @param string $title      Optional. Variable title.
+		 * @param bool   $escape     Optional. Whether to character escape the textual output.
+		 * @param string $space      Internal. Indentation spacing.
+		 * @param bool   $short      Internal. Short or normal annotation.
+		 * @param string $deprecated Deprecated argument. Do not use.
 		 */
 		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', 'db-pretty-output' ) );
@@ -631,10 +631,10 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @deprecated since v1.3 in favour of get_object_info().
 		 *
 		 * @param object $obj        Object to show.
-		 * @param bool   $escape     (internal) Whether to character escape the textual output.
-		 * @param string $space      (internal) Indentation spacing.
-		 * @param bool   $short      (internal) Short or normal annotation.
-		 * @param string $deprecated ==Deprecated argument.
+		 * @param bool   $escape     Internal. Whether to character escape the textual output.
+		 * @param string $space      Internal. Indentation spacing.
+		 * @param bool   $short      Internal. Short or normal annotation.
+		 * @param string $deprecated Deprecated argument. Do not use.
 		 *
 		 * @return void
 		 */
@@ -651,8 +651,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @deprecated since v1.3 in favour of get_ooutput().
 		 *
 		 * @param object $obj        Object for which to show the properties and methods.
-		 * @param string $deprecated ==Deprecated argument.
-		 * @param bool   $is_sub     (internal) Top level or nested object.
+		 * @param string $deprecated Deprecated argument. Do not use.
+		 * @param bool   $is_sub     Internal. Top level or nested object.
 		 *
 		 * @return void
 		 */
@@ -671,7 +671,7 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 * @param string       $col1       Label for the first table column.
 		 * @param string       $col2       Label for the second table column.
 		 * @param string|array $class      One or more CSS classes to add to the table.
-		 * @param string       $deprecated ==Deprecated argument.
+		 * @param string       $deprecated Deprecated argument. Do not use.
 		 *
 		 * @return void
 		 */
