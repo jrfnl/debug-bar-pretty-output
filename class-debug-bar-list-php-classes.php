@@ -62,6 +62,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'DivisionByZeroError', // PHP 7.0.0+.
 			'ParseError',          // PHP 7.0.0+.
 			'TypeError',           // PHP 7.0.0+.
+			'ArgumentCountError',  // PHP 7.1.0+.
 
 
 			/* == Affecting PHPs Behaviour == */
@@ -202,7 +203,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'MongoDB\Driver\WriteError',
 			'MongoDB\Driver\WriteResult',
 
-			// BSON.
+			// MongoDB\BSON.
 			'MongoDB\BSON\Binary',
 			'MongoDB\BSON\Decimal128',
 			'MongoDB\BSON\Javascript',
@@ -216,6 +217,25 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'MongoDB\BSON\Persistable',
 			'MongoDB\BSON\Serializable',
 			'MongoDB\BSON\Unserializable',
+			'MongoDB\BSON\BinaryInterface',
+			'MongoDB\BSON\Decimal128Interface',
+			'MongoDB\BSON\JavascriptInterface',
+			'MongoDB\BSON\MaxKeyInterface',
+			'MongoDB\BSON\MinKeyInterface',
+			'MongoDB\BSON\ObjectIdInterface',
+			'MongoDB\BSON\RegexInterface',
+			'MongoDB\BSON\TimestampInterface',
+			'MongoDB\BSON\UTCDateTimeInterface',
+			'MongoDB\BSON\DBPointer',
+			'MongoDB\BSON\Symbol',
+			'MongoDB\BSON\Undefined',
+
+			// MongoDB\Driver\Monitoring.
+			'MongoDB\Driver\Monitoring\CommandFailedEvent',
+			'MongoDB\Driver\Monitoring\CommandStartedEvent',
+			'MongoDB\Driver\Monitoring\CommandSucceededEvent',
+			'MongoDB\Driver\Monitoring\CommandSubscriber',
+			'MongoDB\Driver\Monitoring\Subscriber',
 
 			// MongoDB Exceptions.
 			'MongoDB\Driver\Exception\AuthenticationException',
@@ -320,8 +340,8 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'IntlTimeZone',               // PHP 5.5.0+.
 			'IntlDateFormatter',
 			'ResourceBundle',
-			'Spoofchecker',
-			'Transliterator',
+			'Spoofchecker',               // PHP 5.4.0+.
+			'Transliterator',             // PHP 5.4.0+.
 			'IntlBreakIterator',          // (No version information available, might only be in Git).
 			'IntlRuleBasedBreakIterator', // (No version information available, might only be in Git).
 			'IntlCodePointBreakIterator', // (No version information available, might only be in Git).
@@ -438,6 +458,12 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'SWFTextField',
 			'SWFVideoStream',
 
+			// Wkhtmltox.
+			// @see http://php.net/manual/en/book.wkhtmltox.php
+			'wkhtmltox\PDF\Converter',     // External extension.
+			'wkhtmltox\PDF\Object',        // External extension.
+			'wkhtmltox\Image\Converter',   // External extension.
+
 
 			/* == Process Control Extensions == */
 			// Ev.
@@ -467,6 +493,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'Stackable', // No longer available ?
 			'Mutex',
 			'Cond',
+			'Volatile',
 
 			// Sync.
 			// @see http://php.net/book.sync
@@ -630,6 +657,25 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			'Yaf_Exception_LoadFailed_Action',
 			'Yaf_Exception_LoadFailed_View',
 
+			// Yaconf.
+			// @see http://php.net/book.yaconf
+			'Yaconf',
+
+			// Data Structures.
+			// PECL icm PHP 7.
+			// @see http://php.net/book.ds
+			'Ds\Collection', // Interface.
+			'Ds\Hashable',   // Interface.
+			'Ds\Sequence',   // Interface.
+			'Ds\Vector',
+			'Ds\Deque',
+			'Ds\Map',
+			'Ds\Pair',
+			'Ds\Set',
+			'Ds\Stack',
+			'Ds\Queue',
+			'Ds\PriorityQueue',
+
 
 			/* == Other Services == */
 			// Chdb - Constant hash database.
@@ -775,23 +821,19 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 
 
 			/* == Text Processing == */
+			// Parle.
+			// @see http://php.net/book.parle
+			'Parle\Lexer',
+			'Parle\RLexer',
+			'Parle\Parser',
+			'Parle\RParser',
+			'Parle\Stack',
+			'Parle\Token',
+			'Parle\ErrorInfo',
+			'Parle\LexerException',
+			'Parle\ParserException',
 
 			/* == Variable and Type Related Extensions == */
-			// Data Structures.
-			// PECL icm PHP 7.
-			// @see http://php.net/book.ds
-			'Ds\Collection', // Interface.
-			'Ds\Hashable',   // Interface.
-			'Ds\Sequence',   // Interface.
-			'Ds\Vector',
-			'Ds\Deque',
-			'Ds\Map',
-			'Ds\Pair',
-			'Ds\Set',
-			'Ds\Stack',
-			'Ds\Queue',
-			'Ds\PriorityQueue',
-
 			// Quickhash.
 			// @see http://php.net/book.quickhash
 			'QuickHashIntSet',
@@ -803,6 +845,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			// @see http://php.net/book.reflection
 			'Reflection',
 			'ReflectionClass',
+			'ReflectionClassConstant', // PHP 7.1.0+.
 			'ReflectionZendExtension',
 			'ReflectionExtension',
 			'ReflectionFunction',
