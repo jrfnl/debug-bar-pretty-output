@@ -74,7 +74,7 @@ if ( ! class_exists( 'Debug_Bar_List_PHP_Classes' ) ) {
 			// @link http://php.net/book.apcu
 			'APCUIterator',
 
-			// Rrunkit
+			// Runkit
 			// @link http://php.net/book.runkit
 			'Runkit_Sandbox',
 			'Runkit_Sandbox_Parent',
