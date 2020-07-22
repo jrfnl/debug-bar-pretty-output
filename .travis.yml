@@ -1,10 +1,7 @@
 # Travis CI (MIT License) configuration file
 # @link https://travis-ci.org/
 
-# Use new container based environment
-sudo: false
-
-dist: trusty
+os: linux
 
 # Declare project language.
 # @link http://about.travis-ci.org/docs/user/languages/php/
@@ -12,22 +9,21 @@ language: php
 
 # Declare versions of PHP to use. Use one decimal max.
 php:
-  - 5.4
-  - 5.5
   - 5.6
   - 7.0
-  - 7.2
   - nightly
 
-matrix:
+jobs:
   fast_finish: true
 
   include:
-    - php: '7.1'
+    - php: 7.4
       env: SNIFF=1
-    - php: '5.3'
+    - php: 5.4
+      dist: trusty
+    - php: 5.3
       dist: precise
-    - php: '5.2'
+    - php: 5.2
       dist: precise
 
   allow_failures:
@@ -36,34 +32,22 @@ matrix:
 before_install:
     # Speed up build time by disabling Xdebug when its not needed.
     - phpenv config-rm xdebug.ini || echo 'No xdebug config.'
-    # Set up temporary paths.
-    - export PHPCS_DIR=/tmp/phpcs
-    - export WPCS_DIR=/tmp/wpcs
-    - export PHPCOMPAT_DIR=/tmp/phpcompatibility
-    - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR; fi
-    # Install WordPress Coding Standards.
-    - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $WPCS_DIR; fi
-    # Install PHP Compatibility sniffs.
-    - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/wimg/PHPCompatibility.git $PHPCOMPAT_DIR; fi
-    # Set install path for PHPCS sniffs.
-    # @link https://github.com/squizlabs/PHP_CodeSniffer/blob/4237c2fc98cc838730b76ee9cee316f99286a2a7/CodeSniffer.php#L1941
-    - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --config-set installed_paths $WPCS_DIR,$PHPCOMPAT_DIR; fi
-    # After CodeSniffer install you should refresh your path.
-    - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
 
+    # Install dependencies.
+    - |
+      if [[ "$SNIFF" == "1" ]]; then
+        composer install --no-suggest --no-interaction
+      fi
 
 # Run test script commands.
 # All commands must exit with code 0 on success. Anything else is considered failure.
 script:
     # Search for PHP syntax errors.
-    - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+    - find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+
     # Check code against the WordPress Coding Standards and for PHP cross-version compatibility.
-    # @link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards
-    # @link https://github.com/wimg/phpcompatibility
-    # @link http://pear.php.net/package/PHP_CodeSniffer/
-    # Uses a custom ruleset based on WordPress.
-    # Only fails the build on errors, not warnings, but still show warnings in the output.
-    - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --runtime-set ignore_warnings_on_exit 1; fi
+    - if [[ "$SNIFF" == "1" ]]; then vendor/bin/phpcs; fi
+
     # Validate the composer.json file.
     # @link https://getcomposer.org/doc/03-cli.md#validate
-    - if [[ $TRAVIS_PHP_VERSION != "5.2" ]]; then composer validate --no-check-all; fi
+    - if [[ $TRAVIS_PHP_VERSION == "5.3" ]]; then composer validate --no-check-all; fi
