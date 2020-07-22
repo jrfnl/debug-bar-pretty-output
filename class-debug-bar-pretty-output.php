@@ -15,7 +15,7 @@
  * @link       https://github.com/jrfnl/debug-bar-pretty-output
  * @version    1.8.0
  *
- * @copyright  2013-2018 Juliette Reinders Folmer
+ * @copyright  2013-2020 Juliette Reinders Folmer
  * @license    http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher.
  */
 
@@ -621,7 +621,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		public static function output( $var, $title = '', $escape = false, $space = '', $short = false, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_output() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', 'db-pretty-output' ) );
-			echo self::get_output( $var, $title, $escape, $space, $short ); // WPCS: xss ok.
+			// phpcs:ignore WordPress.Security.EscapeOutput -- deprecated method.
+			echo self::get_output( $var, $title, $escape, $space, $short );
 		}
 
 
@@ -640,7 +641,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		private static function object_info( $obj, $escape, $space, $short, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_object_info() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', 'db-pretty-output' ) );
-			echo self::get_object_info( $obj, $escape, $space, $short ); // WPCS: xss ok.
+			// phpcs:ignore WordPress.Security.EscapeOutput -- deprecated method.
+			echo self::get_object_info( $obj, $escape, $space, $short );
 		}
 
 
@@ -658,7 +660,8 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		public static function ooutput( $obj, $deprecated = null, $is_sub = false ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_ooutput() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', 'db-pretty-output' ) );
-			echo self::get_ooutput( $obj, $is_sub ); // WPCS: xss ok.
+			// phpcs:ignore WordPress.Security.EscapeOutput -- deprecated method.
+			echo self::get_ooutput( $obj, $is_sub );
 		}
 
 
@@ -677,9 +680,10 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 		 */
 		public static function render_table( $array, $col1, $col2, $class = null, $deprecated = null ) {
 			_deprecated_function( __CLASS__ . '::' . __METHOD__, __CLASS__ . ' 1.3', __CLASS__ . '::get_table() ' . esc_html__( 'or even better: upgrade your Debug Bar plugins to their current version', 'db-pretty-output' ) );
-			echo self::get_table( $array, $col1, $col2, $class ); // WPCS: xss ok.
+			// phpcs:ignore WordPress.Security.EscapeOutput -- deprecated method.
+			echo self::get_table( $array, $col1, $col2, $class );
 		}
-	} // End of class Debug_Bar_Pretty_Output.
+	}
 
 	/* Load text strings for this class. */
 	if ( function_exists( 'is_textdomain_loaded' ) && function_exists( 'load_plugin_textdomain' ) ) {
@@ -687,4 +691,4 @@ if ( ! class_exists( 'Debug_Bar_Pretty_Output' ) && class_exists( 'Debug_Bar_Pan
 			load_plugin_textdomain( 'db-pretty-output', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 		}
 	}
-} // End of if class_exists wrapper.
+}
