@@ -1,57 +1,92 @@
 <?xml version="1.0"?>
-<ruleset name="Debug Bar Pretty Output">
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="Debug Bar Pretty Output"
+	xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
 	<description>The code standard for Debug Bar Pretty Output is WordPress.</description>
 
-	<!-- Show progress & sniff codes. -->
-	<arg value="ps"/>
+	<!--
+	#############################################################################
+	COMMAND LINE ARGUMENTS
+	https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml
+	#############################################################################
+	-->
+
+	<file>.</file>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+
 	<!-- Only check PHP files. -->
 	<arg name="extensions" value="php"/>
 
-	<!-- Check all files in this directory and the directories below it. -->
-	<file>.</file>
+	<!-- Show progress, show the error codes for each message (source). -->
+	<arg value="ps"/>
 
-	<!-- ##### PHP cross-version compatibility ##### -->
-	<config name="testVersion" value="5.2-99.0"/>
+	<!-- Strip the filepaths down to the relevant bit. -->
+	<arg name="basepath" value="./"/>
+
+	<!-- Check up to 8 files simultaneously. -->
+	<arg name="parallel" value="8"/>
+
+
+	<!--
+	#############################################################################
+	SET THE RULES
+	#############################################################################
+	-->
+
+	<config name="testVersion" value="5.2-"/>
 	<rule ref="PHPCompatibility"/>
 
-
-	<!-- ##### WordPress sniffs #####-->
 	<rule ref="WordPress">
 		<!-- No need to lint the PHP, this is done in a separate task in the travis script. -->
 		<exclude name="Generic.PHP.Syntax"/>
 	</rule>
 
 
-	<!-- ##### Customizations #####-->
+	<!--
+	#############################################################################
+	SNIFF SPECIFIC CONFIGURATION
+	#############################################################################
+	-->
 
 	<!-- Set minimum supported WP version for all sniffs which use it. -->
 	<config name="minimum_supported_wp_version" value="3.4"/>
 
 	<!-- Add `PHP_Classes` to the whitelist for non-snakecase variable names. -->
 	<rule ref="WordPress.NamingConventions.ValidVariableName">
-	    <properties>
-	        <property name="customPropertiesWhitelist" value="PHP_classes" type="array"/>
-	    </properties>
+		<properties>
+			<property name="customPropertiesWhitelist" type="array">
+				<element value="PHP_classes"/>
+			</property>
+		</properties>
 	</rule>
 
-	<!-- Verify that the text_domain is set to the desired text-domain.
-		 Multiple valid text domains can be provided as a comma-delimited list. -->
+	<!-- Verify that the text_domain is set to the desired text-domain. -->
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="db-pretty-output"/>
+			<property name="text_domain" type="array">
+				<element value="db-pretty-output"/>
+			</property>
 		</properties>
 	</rule>
 
-	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
-		 Multiple valid prefixes can be provided as a comma-delimited list. -->
+	<!-- Verify that everything in the global namespace is prefixed with a specific prefix. -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="Debug_Bar,db_pretty_output"/>
+			<property name="prefixes" type="array">
+				<element value="Debug_Bar"/>
+				<element value="db_pretty_output"/>
+			</property>
 		</properties>
 	</rule>
 
 
-	<!-- ##### Exlusions #####-->
+	<!--
+	#############################################################################
+	SELECTIVE EXCLUSIONS
+	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
+	#############################################################################
+	-->
 
 	<!-- Exclude the PHP Core classes list from some documentation checks. -->
 	<rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
